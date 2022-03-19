@@ -58,14 +58,11 @@ class CalculatorTest {
         assertThat(1).isEqualTo(1);
     }
 
-
     static Stream<Arguments> addTestData() {
         return IntStream
                 .range(1,20)
                 .mapToObj(item->Arguments.of(r.nextDouble(), r.nextDouble()));
     }
-
-
 
     @DisplayName("ICalculator: parameterized test for add method")
     @ParameterizedTest
@@ -73,8 +70,6 @@ class CalculatorTest {
     void testConstructorValidDates(double a, double b) {
         assertThat(1).isEqualTo(1);
     }
-
-
 
     @RepeatedTest(value = 5)
     void addRepeted() {
