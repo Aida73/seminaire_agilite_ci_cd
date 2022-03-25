@@ -22,7 +22,7 @@ public class TestData {
         public static final  String name = RandomStringUtils.randomAlphanumeric( (SizeMapping.Name.MIN+SizeMapping.Name.MAX)/2);
         public static final  String address=  RandomStringUtils.randomAlphanumeric( (SizeMapping.Adresse.MIN+SizeMapping.Adresse.MAX)/2);
         public static final  String phone=RandomStringUtils.randomNumeric( (SizeMapping.Phone.MIN+SizeMapping.Phone.MAX)/2);
-        public static final String email=RandomStringUtils.randomNumeric( (SizeMapping.Email.MIN+SizeMapping.Email.MAX)/2).concat("@sn.sn");
+        public static final String email=RandomStringUtils.randomNumeric( (SizeMapping.Email.MIN+SizeMapping.Email.MAX)/2).concat("@ept.sn");
         public static final float longitude= RandomUtils.nextFloat();
         public static final float latitude=RandomUtils.nextFloat();
     }

@@ -11,11 +11,10 @@ import java.util.stream.Stream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class CalculatorTest {
-
+class A_CalculatorTest {
 
     private static ICalculator calculator;
-    private  static double a,b;
+    private  double a,b;
     private static  Random r ;
 
 
@@ -23,14 +22,15 @@ class CalculatorTest {
     static void beforeAll(){
         log.info("Something to do before all tests");
         calculator = new Calculator();
-        a=11;
-        b=22;
         r = new Random();
     }
+
 
     @BeforeEach
       void beforeEach(){
         log.info("Something to do before each test");
+        a=11;
+        b=22;
     }
 
     @Test
@@ -67,7 +67,7 @@ class CalculatorTest {
     @DisplayName("ICalculator: parameterized test for add method")
     @ParameterizedTest
     @MethodSource("addTestData")
-    void testConstructorValidDates(double a, double b) {
+    void testAddOperationWithParameterizedData(double a, double b) {
         assertThat(1).isEqualTo(1);
     }
 

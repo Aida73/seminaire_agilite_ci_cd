@@ -1,6 +1,8 @@
 package sn.ept.git.seminaire.cicd.mapper;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.SocieteVMTestData;
@@ -10,26 +12,26 @@ import sn.ept.git.seminaire.cicd.models.Societe;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SocieteDTOMapperTest extends  MapperBaseTest{
+class SocieteDTOMapperTest extends MapperBaseTest {
 
-    SocieteVM vm;
-    Societe entity;
+    static SocieteVM vm;
+    static Societe entity;
 
     @Autowired
     private SocieteVMMapper mapper;
 
-
-    @BeforeEach
-    void setUp() {
+    @BeforeAll
+    static void beforeAll() {
         vm = SocieteVMTestData.defaultVM();
     }
 
-
+    @Order(value = 1)
     @Test
-    void toEntity() {
+    @DisplayName("societe : should map societe vm to entity")
+    void mapVmToEntityShouldBeCorrect() {
         entity = mapper.asEntity(vm);
         assertThat(entity).isNotNull();
-        assertThat(entity.getId()).isEqualTo(vm.getId());
+        assertThat(entity.getId()).isNotNull().isEqualTo(vm.getId());
         assertThat(entity.getCreatedDate()).isEqualTo(vm.getCreatedDate());
         assertThat(entity.getLastModifiedDate()).isEqualTo(vm.getLastModifiedDate());
         assertThat(entity.getVersion()).isEqualTo(vm.getVersion());
@@ -43,12 +45,13 @@ class SocieteDTOMapperTest extends  MapperBaseTest{
         assertThat(entity.getPhone()).isEqualTo(vm.getPhone());
     }
 
+    @DisplayName("societe : should map societe entity to vm ")
     @Test
     void toDTO() {
         entity = mapper.asEntity(vm);
-        vm =mapper.asDTO(entity);
+        vm = mapper.asDTO(entity);
         assertThat(vm).isNotNull();
-        assertThat(vm.getId()).isEqualTo(entity.getId());
+        assertThat(vm.getId()).isNotNull().isEqualTo(entity.getId());
         assertThat(vm.getCreatedDate()).isEqualTo(entity.getCreatedDate());
         assertThat(vm.getLastModifiedDate()).isEqualTo(entity.getLastModifiedDate());
         assertThat(vm.getVersion()).isEqualTo(entity.getVersion());

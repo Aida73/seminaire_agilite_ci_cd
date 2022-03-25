@@ -1,29 +1,30 @@
 package sn.ept.git.seminaire.cicd.repository;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.SocieteDTOTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
 import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SocieteRepositoryTest extends RepositoryBaseTest {
 
-    @Autowired
-    SocieteRepository repository;
+
     SocieteDTO dto;
     Societe entity;
+    Optional<Societe> optionalSociete;
     @Autowired
-    protected SocieteMapper mapper;
-
+    private SocieteMapper mapper;
+    @Autowired
+    private SocieteRepository repository;
 
     @BeforeEach
     void setUp() {
@@ -35,57 +36,65 @@ class SocieteRepositoryTest extends RepositoryBaseTest {
 
     @Test
     void givenRepository_whenFindByName_thenResult() {
-        Optional<Societe> optional = repository.findByName(entity.getName());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isPresent();
+        optionalSociete = repository.findByName(entity.getName());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isPresent()
+                .map(item -> item.getName()).hasValue(TestData.Default.name);
     }
 
     @Test
     void givenRepository_whenFindByBadName_thenNotFound() {
-        Optional<Societe> optional = repository.findByName(UUID.randomUUID().toString());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isNotPresent();
+        optionalSociete = repository.findByName(UUID.randomUUID().toString());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isNotPresent();
     }
 
     @Test
     void givenRepository_whenFindDeleted_thenNotFound() {
         entity.setDeleted(true);
         entity = repository.saveAndFlush(entity);
-        Optional<Societe> optional = repository.findByName(entity.getName());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isNotPresent();
+        optionalSociete = repository.findByName(entity.getName());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isNotPresent();
     }
 
     @Test
     void givenRepository_whenFindByEmail_thenResult() {
-        Optional<Societe> optional = repository.findByEmail(entity.getEmail());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isPresent();
+        optionalSociete = repository.findByEmail(entity.getEmail());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isPresent()
+                .map(item -> item.getEmail()).hasValue(TestData.Default.email);
     }
 
     @Test
     void givenRepository_whenFindByBadEmail_thenNotFound() {
-        Optional<Societe> optional = repository.findByEmail(UUID.randomUUID().toString());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isNotPresent();
+        optionalSociete = repository.findByEmail(UUID.randomUUID().toString());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isNotPresent();
     }
-
 
 
     @Test
     void givenRepository_whenFindByPhone_thenResult() {
-        Optional<Societe> optional = repository.findByPhone(entity.getPhone());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isPresent();
+        optionalSociete = repository.findByPhone(entity.getPhone());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isPresent()
+                .map(item -> item.getPhone()).hasValue(TestData.Default.phone);
     }
 
     @Test
     void givenRepository_whenFindByBadPhone_thenNotFound() {
-        Optional<Societe> optional = repository.findByPhone(UUID.randomUUID().toString());
-        assertThat(optional).isNotNull();
-        assertThat(optional).isNotPresent();
+        optionalSociete = repository.findByPhone(UUID.randomUUID().toString());
+        assertThat(optionalSociete)
+                .isNotNull()
+                .isNotPresent();
     }
-
 
 
 }

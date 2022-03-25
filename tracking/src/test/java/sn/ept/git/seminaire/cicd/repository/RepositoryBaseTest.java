@@ -1,5 +1,13 @@
 package sn.ept.git.seminaire.cicd.repository;
 
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.junit4.SpringRunner;
 import sn.ept.git.seminaire.cicd.TrackingApplication;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,14 +19,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest(classes = {TrackingApplication.class})
 @Transactional
 class RepositoryBaseTest {
-    public static final int DEFAULT_SIZE = 10;
-    public static final int DEFAULT_PAGE = 0;
-    static final PageRequest PAGE = PageRequest.of(DEFAULT_PAGE, DEFAULT_SIZE);
+
+    @MockBean
+    TestEntityManager tem;
+
+    ApplicationContext context;
 
     @Test
-    void basic() {
-        assertThat(PAGE.getPageSize()).isEqualTo(DEFAULT_SIZE);
-        assertThat(PAGE.getPageNumber()).isEqualTo(DEFAULT_PAGE);
+    void defaultPageShouldBePositive() {
+        assertThat(tem)
+                .isNotNull();
+
     }
 
 }
