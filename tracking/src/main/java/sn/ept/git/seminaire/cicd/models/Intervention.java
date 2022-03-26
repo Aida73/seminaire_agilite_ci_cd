@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mc_interventions")
+@Table(name = "acicd_interventions")
 @Where(clause = BaseEntity.CLAUSE)
 public class Intervention extends BaseEntity {
 

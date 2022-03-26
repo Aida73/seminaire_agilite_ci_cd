@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mc_exercices")
+@Table(name = "acicd_exercices")
 @Where(clause = Type.CLAUSE)
 public class Exercice extends BaseEntity {
 

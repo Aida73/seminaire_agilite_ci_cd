@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mc_sites")
+@Table(name = "acicd_sites")
 @Where(clause = BaseEntity.CLAUSE)
 public class Site extends BaseEntity {
 

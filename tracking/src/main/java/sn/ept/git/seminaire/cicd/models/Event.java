@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="mc_events")
+@Table(name="acicd_events")
 @Where(clause = Event.CLAUSE)
 public class Event extends BaseEntity{
 

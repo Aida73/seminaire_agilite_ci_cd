@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mc_agents")
+@Table(name = "acicd_agents")
 @Where(clause = Type.CLAUSE)
 public class Agent extends BaseEntity {
 
@@ -43,7 +43,6 @@ public class Agent extends BaseEntity {
     @Column(unique = true)
     @Size(min = SizeMapping.Email.MIN, max = SizeMapping.Email.MAX)
     private String email;
-
 
     @Where(clause = CLAUSE)
     @ToString.Exclude

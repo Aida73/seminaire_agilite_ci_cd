@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="mc_types")
+@Table(name="acicd_types")
 @Where(clause = BaseEntity.CLAUSE)
 public class Type extends BaseEntity{
 

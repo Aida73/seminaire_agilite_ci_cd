@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="mc_attachements")
+@Table(name="acicd_attachements")
 @Where(clause = Type.CLAUSE)
 public class Attachement extends BaseEntity{
 

@@ -19,7 +19,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="mc_tools")
+@Table(name="acicd_tools")
 @Where(clause = BaseEntity.CLAUSE)
 public class Tool extends BaseEntity{
 

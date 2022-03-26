@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "mc_societes")
+@Table(name = "acicd_societes")
 @Where(clause = BaseEntity.CLAUSE)
 @DynamicUpdate
 public class Societe extends BaseEntity {
