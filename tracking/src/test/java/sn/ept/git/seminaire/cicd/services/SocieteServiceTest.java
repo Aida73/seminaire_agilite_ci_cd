@@ -139,8 +139,10 @@ class SocieteServiceTest extends ServiceBaseTest {
         );
     }
 
-/*findAll
-    update*/
+/*
+    findAll
+    update
+*/
 
 
 }

@@ -75,7 +75,6 @@ class SocieteResourceTest extends BasicResourceTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.version").exists())
                 .andExpect(jsonPath("$.enabled").exists())
                 .andExpect(jsonPath("$.deleted").exists())

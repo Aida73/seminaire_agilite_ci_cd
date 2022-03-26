@@ -46,7 +46,6 @@ class D_AssertJMatchersTest {
         Map<String, String> map = new HashMap<>();
         map.put("nom", "DIC 2");
         map.put("departement", "GIT");
-
         assertThat(map)
                 .hasSize(2)
                 .containsOnlyKeys("nom","departement")

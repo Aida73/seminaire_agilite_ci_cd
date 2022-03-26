@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface SocieteRepository extends JpaRepository<Societe, UUID> {
 
 
-    @Query("select s from Societe  s where s.name=:name")
+    @Query("select  s from Societe  s where s.name=:name")
     Optional<Societe> findByName(@Param("name") String name);
 
     @Query("select s from Societe  s where s.phone=:phone")

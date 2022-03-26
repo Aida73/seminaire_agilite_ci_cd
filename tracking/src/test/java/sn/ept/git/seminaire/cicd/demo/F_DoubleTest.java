@@ -43,16 +43,7 @@ class F_DoubleTest {
         b = 22;
     }
 
-    @Test
-    void test_then() {
-        when(mockCalculator.add(ArgumentMatchers.anyDouble(), ArgumentMatchers.anyDouble()))
-        .then(returnsFirstArg());
-        double provided = mockCalculator.add(a, b);
-        double expected = a;
-        Assertions
-                .assertThat(provided)
-                .isEqualTo(expected);
-    }
+
 
 
     @Test
@@ -93,10 +84,23 @@ class F_DoubleTest {
                 .isEqualTo(expected);
     }
 
+
+    @Test
+    void test_then() {
+        when(mockCalculator.add(ArgumentMatchers.anyDouble(), ArgumentMatchers.anyDouble()))
+                .then(returnsFirstArg());
+        double provided = mockCalculator.add(a, b);
+        double expected = a;
+        Assertions
+                .assertThat(provided)
+                .isEqualTo(expected);
+    }
+
     @Test
     void test_thenThrow() {
         when(mockCalculator.divide(ArgumentMatchers.anyDouble(), ArgumentMatchers.eq(0.0)))
                 .thenThrow(ArithmeticException.class);
+
         assertThrows(
                 ArithmeticException.class,
                 () -> mockCalculator.divide(a, 0.0)

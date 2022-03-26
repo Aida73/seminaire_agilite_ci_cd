@@ -63,7 +63,7 @@ class E_FirstPrincipalTest {
         @Order(0)
         @Test
         void addShouldReturnTheSumOfTwoPositiveNumbers() {
-            //org.assertj.core.api.Assertions.fail("");
+          //  org.assertj.core.api.Assertions.fail("");
             resultOne = calculator.add(b, resultOne);
             assertThat(resultOne).isEqualTo(55);
         }
@@ -106,7 +106,7 @@ class E_FirstPrincipalTest {
 
 
     /**
-     * hat it means is that running your test leaves it perfectly clear whether it passed or failed.
+     * what it means is that running your test leaves it perfectly clear whether it passed or failed.
      * JUnit does this and fails with red, which lets you red-green-refactor.
      * By using a testing framework like JUnit, utilizing assertion libraries, and writing specific tests,
      * you can ensure that if a test fails, there will be clear and unambiguous reporting that tells you exactly what passed or failed.
@@ -145,7 +145,7 @@ class E_FirstPrincipalTest {
      * Tests for exceptions and errors.
      * Tests for illegal arguments or bad inputs.
      */
-    //@Nested
+    @Nested
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class ThoroughAndTimely {
 
@@ -161,12 +161,33 @@ class E_FirstPrincipalTest {
 
         String getMobileOperator(String phone) throws BadPhoneException {
             String result="";
+            Pattern r = Pattern.compile(REGEX);
+            Matcher matcher = r.matcher(phone);
+            if (!matcher.matches()) {
+                throw new BadPhoneException("Bad phone " + phone);
+            }
+            String operator = matcher.group(2);
+
+            switch (operator) {
+                case "77":
+                case "78":
+                    result = ORANGE;
+                    break;
+                case "76":
+                    result = FREE;
+                    break;
+                case "70":
+                    result = EXPRESSO;
+                    break;
+                default:
+                    result = PROMOBILE;
+            }
             return result;
         }
 
 
         @Test
-        void getOperator_withPlusIndicatifAnd77_shouldReturnOrange() {
+        void getMobileOperator_withPlusIndicatifAnd77_shouldReturnOrange() {
             indicatif = "+221";
             operator = "77";
             phone =String.format(template, indicatif, operator, number);
@@ -175,7 +196,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withPlusIndicatifAnd78_shouldReturnOrange() {
+        void getMobileOperator_withPlusIndicatifAnd78_shouldReturnOrange() {
             indicatif = "+221";
             operator = "78";
             phone =String.format(template, indicatif, operator, number);
@@ -184,7 +205,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_with00IndicatifAnd77_shouldReturnOrange() {
+        void getMobileOperator_with00IndicatifAnd77_shouldReturnOrange() {
             indicatif = "00221";
             operator = "77";
             phone =String.format(template, indicatif, operator, number);
@@ -193,7 +214,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_with00IndicatifAnd78_shouldReturnOrange() {
+        void getMobileOperator_with00IndicatifAnd78_shouldReturnOrange() {
             indicatif = "00221";
             operator = "78";
             phone =String.format(template, indicatif, operator, number);
@@ -202,7 +223,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withoutIndicatifAnd77_shouldReturnOrange() {
+        void getMobileOperator_withoutIndicatifAnd77_shouldReturnOrange() {
             indicatif = "";
             operator = "77";
             phone =String.format(template, indicatif, operator, number);
@@ -211,7 +232,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withoutIndicatifAnd78_shouldReturnOrange() {
+        void getMobileOperator_withoutIndicatifAnd78_shouldReturnOrange() {
             indicatif = "";
             operator = "78";
             phone =String.format(template, indicatif, operator, number);
@@ -220,7 +241,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withPlusIndicatifAnd76_shouldReturnFree() {
+        void getMobileOperator_withPlusIndicatifAnd76_shouldReturnFree() {
             indicatif = "+221";
             operator = "76";
             phone =String.format(template, indicatif, operator, number);
@@ -229,7 +250,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_with00IndicatifAnd76_shouldReturnFree() {
+        void getMobileOperator_with00IndicatifAnd76_shouldReturnFree() {
             indicatif = "00221";
             operator = "76";
             phone =String.format(template, indicatif, operator, number);
@@ -238,7 +259,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withoutIndicatifAnd76_shouldReturnFree() {
+        void getMobileOperator_withoutIndicatifAnd76_shouldReturnFree() {
             indicatif = "";
             operator = "76";
             phone =String.format(template, indicatif, operator, number);
@@ -247,7 +268,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withPlusIndicatifAnd70_shouldReturnExpresso() {
+        void getMobileOperator_withPlusIndicatifAnd70_shouldReturnExpresso() {
             indicatif = "+221";
             operator = "70";
             phone =String.format(template, indicatif, operator, number);
@@ -256,7 +277,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_with00IndicatifAnd70_shouldReturnExpresso() {
+        void getMobileOperator_with00IndicatifAnd70_shouldReturnExpresso() {
             indicatif = "00221";
             operator = "70";
             phone =String.format(template, indicatif, operator, number);
@@ -265,7 +286,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withoutIndicatifAnd70_shouldReturnExpresso() {
+        void getMobileOperator_withoutIndicatifAnd70_shouldReturnExpresso() {
             indicatif = "";
             operator = "70";
             phone =String.format(template, indicatif, operator, number);
@@ -274,7 +295,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withPlusIndicatifAnd75_shouldReturnPromobile() {
+        void getMobileOperator_withPlusIndicatifAnd75_shouldReturnPromobile() {
             indicatif = "+221";
             operator = "75";
             phone =String.format(template, indicatif, operator, number);
@@ -283,7 +304,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_with00IndicatifAnd75_shouldReturnPromobile() {
+        void getMobileOperator_with00IndicatifAnd75_shouldReturnPromobile() {
             indicatif = "00221";
             operator = "75";
             phone =String.format(template, indicatif, operator, number);
@@ -292,7 +313,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withoutIndicatifAnd75_shouldReturnPromobile() {
+        void getMobileOperator_withoutIndicatifAnd75_shouldReturnPromobile() {
             indicatif = "";
             operator = "75";
             phone =String.format(template, indicatif, operator, number);
@@ -301,7 +322,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withBadIndicatif_shouldThrowError() {
+        void getMobileOperator_withBadIndicatif_shouldThrowError() {
             indicatif = "+222";
             operator = "77";
             phone =String.format(template, indicatif, operator, number);
@@ -312,7 +333,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withBadOperator_shouldThrowError() {
+        void getMobileOperator_withBadOperator_shouldThrowError() {
             indicatif = "+221";
             operator = "79";
             phone =String.format(template, indicatif, operator, number);
@@ -323,7 +344,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withNumberLessThan7digits_shouldThrowError() {
+        void getMobileOperator_withNumberLessThan7digits_shouldThrowError() {
             indicatif = "+221";
             operator = "77";
             phone =String.format(template, indicatif, operator, number.substring(0, 5));
@@ -334,7 +355,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withNumberMorThan7digits_shouldThrowError() {
+        void getMobileOperator_withNumberMorThan7digits_shouldThrowError() {
             indicatif = "+221";
             operator = "77";
             phone =String.format(template, indicatif, operator, number.concat("2"));
@@ -345,7 +366,7 @@ class E_FirstPrincipalTest {
         }
 
         @Test
-        void getOperator_withBadNumber_shouldThrowError() {
+        void getMobileOperator_withBadNumber_shouldThrowError() {
             indicatif = "+221";
             operator = "77";
             phone =String.format(template, indicatif, operator, number.replace("9", "n"));

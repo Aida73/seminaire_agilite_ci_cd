@@ -1,3 +1,6 @@
+
+[
+
 {
   "version": 0,
   "enabled": true,
@@ -13,3 +16,18 @@
   "longitude": 0.037535965,
   "latitude": 0.7408897
 }
+,
+
+
+
+  {
+    "name": "H4 tech",
+    "address": "H4",
+    "phone": "339511234",
+    "email": "h4@ept.sn",
+    "longitude": 0.037535965,
+    "latitude": 0.7408897
+  }
+
+]
+
