@@ -145,7 +145,7 @@ class E_FirstPrincipalTest {
      * Tests for exceptions and errors.
      * Tests for illegal arguments or bad inputs.
      */
-    @Nested
+    //@Nested
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class ThoroughAndTimely {
 
@@ -161,27 +161,6 @@ class E_FirstPrincipalTest {
 
         String getMobileOperator(String phone) throws BadPhoneException {
             String result="";
-           /* Pattern r = Pattern.compile(REGEX);
-            Matcher matcher = r.matcher(phone);
-            if (!matcher.matches()) {
-                throw new BadPhoneException("Bad phone " + phone);
-            }
-            String operator = matcher.group(2);
-
-            switch (operator) {
-                case "77":
-                case "78":
-                    result = ORANGE;
-                    break;
-                case "76":
-                    result = FREE;
-                    break;
-                case "70":
-                    result = EXPRESSO;
-                    break;
-                default:
-                    result = PROMOBILE;
-            }*/
             return result;
         }
 

@@ -16,10 +16,10 @@ import sn.ept.git.seminaire.cicd.TrackingApplication;
 class BasicResourceTest {
 
     @Autowired
-    protected MockMvc mvc;
+    protected MockMvc mockMvc;
 
     @Test
     void basic() {
-        Assertions.assertThat(mvc).isNotNull();
+        Assertions.assertThat(mockMvc).isNotNull();
     }
 }

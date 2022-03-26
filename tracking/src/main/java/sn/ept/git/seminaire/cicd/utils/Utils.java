@@ -14,16 +14,16 @@ public final class Utils {
         super();
     }
 
-    public static final boolean contains(Set<? extends BaseEntity> list, UUID id ) {
+    public static boolean contains(Set<? extends BaseEntity> list, UUID id ) {
         return list.stream().filter(item->item.getId().equals(id)).findFirst().isPresent();
     }
 
 
-    public static final Set<UUID> findAbsentIds(List<? extends BaseEntity> list, Set<UUID> ids ) {
+    public static  Set<UUID> findAbsentIds(List<? extends BaseEntity> list, Set<UUID> ids ) {
         return findAbsentIds(list.stream().collect(Collectors.toSet()), ids);
     }
 
-    public static final Set<UUID> findAbsentIds(Set<? extends BaseEntity> list, Set<UUID> ids ) {
+    public static  Set<UUID> findAbsentIds(Set<? extends BaseEntity> list, Set<UUID> ids ) {
         return ids
                 .stream()
                 .filter(item->!contains(list,item))

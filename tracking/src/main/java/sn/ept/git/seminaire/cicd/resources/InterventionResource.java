@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.InterventionDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.InterventionVM;
 import sn.ept.git.seminaire.cicd.models.Intervention;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class InterventionResource {
     }
 
     @GetMapping(UrlMapping.Intervention.ALL)
-    public ResponseEntity<List<InterventionDTO>> findAll() {
-        List<InterventionDTO> result = service.findAll();
+    public ResponseEntity<Page<InterventionDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<InterventionDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class InterventionResource {
     }
 
     @PostMapping(UrlMapping.Intervention.ADD)
-    public ResponseEntity<InterventionDTO> create(@RequestBody InterventionVM vm) {
+    public ResponseEntity<InterventionDTO> create(@RequestBody @Valid InterventionVM vm) {
         InterventionDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class InterventionResource {
     @PutMapping(UrlMapping.Intervention.UPDATE)
     public ResponseEntity<InterventionDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody InterventionVM vm) {
+            @RequestBody @Valid InterventionVM vm) {
         final InterventionDTO dto = service.update(id, vm);
         Optional<InterventionDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);

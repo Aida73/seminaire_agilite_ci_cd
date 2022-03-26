@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.EventDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.EventVM;
 import sn.ept.git.seminaire.cicd.models.Event;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class EventResource {
     }
 
     @GetMapping(UrlMapping.Event.ALL)
-    public ResponseEntity<List<EventDTO>> findAll() {
-        List<EventDTO> result = service.findAll();
+    public ResponseEntity<Page<EventDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<EventDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class EventResource {
     }
 
     @PostMapping(UrlMapping.Event.ADD)
-    public ResponseEntity<EventDTO> create(@RequestBody EventVM vm) {
+    public ResponseEntity<EventDTO> create(@RequestBody @Valid EventVM vm) {
         EventDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class EventResource {
     @PutMapping(UrlMapping.Event.UPDATE)
     public ResponseEntity<EventDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody EventVM vm) {
+            @RequestBody @Valid  EventVM vm) {
         final EventDTO dto = service.update(id, vm);
         Optional<EventDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);

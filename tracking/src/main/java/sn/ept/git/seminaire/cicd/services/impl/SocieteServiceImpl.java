@@ -34,11 +34,18 @@ public class SocieteServiceImpl implements ISocieteService {
         this.vmMapper = vmMapper;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public SocieteDTO save(SocieteVM vm) {
-        final Optional<Societe> optional = repository.findByName(vm.getName());
+         Optional<Societe> optional = repository.findByName(vm.getName());
         ExceptionUtils.absentOrThrow(optional, ItemExistsException.NAME_EXISTS, vm.getName());
+
+        optional = repository.findByPhone(vm.getPhone());
+        ExceptionUtils.absentOrThrow(optional, ItemExistsException.PHONE_EXISTS, vm.getPhone());
+
+        optional = repository.findByEmail(vm.getEmail());
+        ExceptionUtils.absentOrThrow(optional, ItemExistsException.EMAIL_EXISTS, vm.getEmail());
+
         return mapper.asDTO(repository.saveAndFlush(vmMapper.asEntity(vm)));
     }
 
@@ -46,10 +53,10 @@ public class SocieteServiceImpl implements ISocieteService {
     @Override
     public void delete(UUID uuid) {
         final Optional<Societe> optional = repository.findById(uuid);
-        ExceptionUtils.presentOrThrow(optional, ItemNotFoundException.SITE_BY_ID, uuid.toString());
-        final Societe site = optional.get();
-        site.setDeleted(true);
-        repository.saveAndFlush(site);
+        ExceptionUtils.presentOrThrow(optional, ItemNotFoundException.SOCIETE_BY_ID, uuid.toString());
+        final Societe societe = optional.get();
+        societe.setDeleted(true);
+        repository.saveAndFlush(societe);
     }
 
     @Override
@@ -75,14 +82,35 @@ public class SocieteServiceImpl implements ISocieteService {
                 .map(mapper::asDTO);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public SocieteDTO update(UUID uuid, SocieteVM vm) {
-        final Optional<Societe> optional = repository.findById(uuid);
-        ExceptionUtils.presentOrThrow(optional, ItemNotFoundException.SITE_BY_ID, vm.getId().toString());
+         Optional<Societe>  optional = repository.findByNameWithIdNotEqual(vm.getName(),uuid);
+        ExceptionUtils.absentOrThrow(optional, ItemExistsException.NAME_EXISTS, vm.getName());
+
+        optional = repository.findByPhoneWithIdNotEqual(vm.getPhone(),uuid);
+        ExceptionUtils.absentOrThrow(optional, ItemExistsException.PHONE_EXISTS, vm.getPhone());
+
+        optional = repository.findByEmailWithIdNotEqual(vm.getEmail(),uuid);
+        ExceptionUtils.absentOrThrow(optional, ItemExistsException.EMAIL_EXISTS, vm.getEmail());
+
+        optional = repository.findById(uuid);
+        ExceptionUtils.presentOrThrow(optional, ItemNotFoundException.SOCIETE_BY_ID, vm.getId().toString());
+
         final Societe item = optional.get();
         item.setName(vm.getName());
-        //more changes if required
+        item.setPhone(vm.getPhone());
+        item.setEmail(vm.getEmail());
+        item.setAddress(vm.getAddress());
+        item.setLongitude(vm.getLongitude());
+        item.setLatitude(vm.getLatitude());
+
         return mapper.asDTO(repository.saveAndFlush(item));
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

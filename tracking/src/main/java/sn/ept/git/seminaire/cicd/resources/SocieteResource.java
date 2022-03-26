@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
 import sn.ept.git.seminaire.cicd.models.Societe;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class SocieteResource {
     }
 
     @GetMapping(UrlMapping.Societe.ALL)
-    public ResponseEntity<List<SocieteDTO>> findAll() {
-        List<SocieteDTO> result = service.findAll();
+    public ResponseEntity<Page<SocieteDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<SocieteDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class SocieteResource {
     }
 
     @PostMapping(UrlMapping.Societe.ADD)
-    public ResponseEntity<SocieteDTO> create(@RequestBody SocieteVM vm) {
+    public ResponseEntity<SocieteDTO> create(@Valid @RequestBody  SocieteVM vm) {
         SocieteDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class SocieteResource {
     @PutMapping(UrlMapping.Societe.UPDATE)
     public ResponseEntity<SocieteDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody SocieteVM vm) {
+            @RequestBody @Valid SocieteVM vm) {
         final SocieteDTO dto = service.update(id, vm);
         Optional<SocieteDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);

@@ -38,7 +38,7 @@ public class AgentServiceImpl implements IAgentService {
         this.vmMapper = vmMapper;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public AgentDTO save(AgentVM vm) {
         Optional<Agent> optional = repository.findByPhone(vm.getPhone());
@@ -55,7 +55,7 @@ public class AgentServiceImpl implements IAgentService {
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public void delete(UUID uuid) {
         final Optional<Agent> optional = repository.findById(uuid);
@@ -88,7 +88,7 @@ public class AgentServiceImpl implements IAgentService {
                 .map(mapper::asDTO);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional
     @Override
     public AgentDTO update(UUID uuid, AgentVM vm) {
 
@@ -107,5 +107,11 @@ public class AgentServiceImpl implements IAgentService {
         item.setAddress(vm.getAddress());
         //more changes if required
         return mapper.asDTO(repository.saveAndFlush(item));
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

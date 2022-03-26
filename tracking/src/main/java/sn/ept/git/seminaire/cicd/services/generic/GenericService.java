@@ -19,4 +19,6 @@ public interface GenericService<D,V, I> {
     Page<D> findAll(Pageable pageable);
 
     D update(I id, V vm);
+
+    void deleteAll();
 }

@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,8 +29,10 @@ public class SiteResource {
     }
 
     @GetMapping(UrlMapping.Site.ALL)
-    public ResponseEntity<Page<SiteDTO>> findAll(@PageableDefault Pageable pageable) {
-        Page<SiteDTO> result = service.findAll(pageable);
+    public ResponseEntity<Page<SiteDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<SiteDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -39,7 +42,7 @@ public class SiteResource {
     }
 
     @PostMapping(UrlMapping.Site.ADD)
-    public ResponseEntity<SiteDTO> create(@RequestBody SiteVM vm) {
+    public ResponseEntity<SiteDTO> create(@RequestBody @Valid SiteVM vm) {
         SiteDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -58,7 +61,7 @@ public class SiteResource {
     @PutMapping(UrlMapping.Site.UPDATE)
     public ResponseEntity<SiteDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody SiteVM vm) {
+            @RequestBody @Valid SiteVM vm) {
         final SiteDTO dto = service.update(id, vm);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(dto),HttpStatus.ACCEPTED);
     }

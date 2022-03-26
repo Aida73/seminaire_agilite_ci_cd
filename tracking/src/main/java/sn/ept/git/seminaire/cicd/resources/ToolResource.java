@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.ToolDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.ToolVM;
 import sn.ept.git.seminaire.cicd.models.Tool;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class ToolResource {
     }
 
     @GetMapping(UrlMapping.Tool.ALL)
-    public ResponseEntity<List<ToolDTO>> findAll() {
-        List<ToolDTO> result = service.findAll();
+    public ResponseEntity<Page<ToolDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<ToolDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class ToolResource {
     }
 
     @PostMapping(UrlMapping.Tool.ADD)
-    public ResponseEntity<ToolDTO> create(@RequestBody ToolVM vm) {
+    public ResponseEntity<ToolDTO> create(@RequestBody @Valid ToolVM vm) {
         ToolDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class ToolResource {
     @PutMapping(UrlMapping.Tool.UPDATE)
     public ResponseEntity<ToolDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody ToolVM vm) {
+            @RequestBody @Valid ToolVM vm) {
         final ToolDTO dto = service.update(id, vm);
         Optional<ToolDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);

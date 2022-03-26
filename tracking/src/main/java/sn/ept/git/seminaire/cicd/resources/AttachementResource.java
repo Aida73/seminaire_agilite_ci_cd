@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.AttachementDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.AttachementVM;
 import sn.ept.git.seminaire.cicd.models.Attachement;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class AttachementResource {
     }
 
     @GetMapping(UrlMapping.Attachement.ALL)
-    public ResponseEntity<List<AttachementDTO>> findAll() {
-        List<AttachementDTO> result = service.findAll();
+    public ResponseEntity<Page<AttachementDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<AttachementDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class AttachementResource {
     }
 
     @PostMapping(UrlMapping.Attachement.ADD)
-    public ResponseEntity<AttachementDTO> create(@RequestBody AttachementVM vm) {
+    public ResponseEntity<AttachementDTO> create(@RequestBody  @Valid AttachementVM vm) {
         AttachementDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class AttachementResource {
     @PutMapping(UrlMapping.Attachement.UPDATE)
     public ResponseEntity<AttachementDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody AttachementVM vm) {
+            @RequestBody  @Valid  AttachementVM vm) {
         final AttachementDTO dto = service.update(id, vm);
         Optional<AttachementDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);

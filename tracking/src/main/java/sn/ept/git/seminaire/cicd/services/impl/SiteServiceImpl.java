@@ -106,4 +106,10 @@ public class SiteServiceImpl implements ISiteService {
         //more changes if required
         return mapper.asDTO(repository.saveAndFlush(item));
     }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
+    }
 }

@@ -1,5 +1,6 @@
 package sn.ept.git.seminaire.cicd.services.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import sn.ept.git.seminaire.cicd.dto.EventDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.EventVM;
 import sn.ept.git.seminaire.cicd.mappers.EventMapper;
@@ -63,5 +64,11 @@ public class EventServiceImpl implements IEventService {
     @Override
     public EventDTO update(UUID uuid, EventVM vm) {
         return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

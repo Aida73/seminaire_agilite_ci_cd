@@ -8,12 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(classes = {TrackingApplication.class})
-@Transactional
-class MapperBaseTest {
-
-    @Test
-    void toEntity() {
-        assertThat(1L).isPositive();
-    }
-
-}
+class MapperBaseTest { }

@@ -35,7 +35,6 @@ public  class BaseDTO implements Serializable {
     @Builder.Default
     private Instant lastModifiedDate = Instant.now();
 
-    @Version
     private int version;
 
     @Builder.Default

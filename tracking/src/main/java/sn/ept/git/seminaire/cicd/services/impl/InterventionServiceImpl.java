@@ -1,5 +1,6 @@
 package sn.ept.git.seminaire.cicd.services.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import sn.ept.git.seminaire.cicd.dto.InterventionDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.InterventionVM;
 import sn.ept.git.seminaire.cicd.exceptions.ItemNotFoundException;
@@ -109,6 +110,12 @@ public class InterventionServiceImpl implements IInterventionService {
     @Override
     public InterventionDTO update(UUID uuid, InterventionVM vm) {
         return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 
 }

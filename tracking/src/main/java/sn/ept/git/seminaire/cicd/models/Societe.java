@@ -1,6 +1,7 @@
 package sn.ept.git.seminaire.cicd.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.DynamicUpdate;
 import sn.ept.git.seminaire.cicd.utils.SizeMapping;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ import java.util.Set;
 @Entity
 @Table(name = "mc_societes")
 @Where(clause = BaseEntity.CLAUSE)
+@DynamicUpdate
 public class Societe extends BaseEntity {
 
     @NotBlank

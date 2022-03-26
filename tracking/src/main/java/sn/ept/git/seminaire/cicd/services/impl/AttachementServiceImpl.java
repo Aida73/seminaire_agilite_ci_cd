@@ -1,5 +1,6 @@
 package sn.ept.git.seminaire.cicd.services.impl;
 
+import org.springframework.transaction.annotation.Transactional;
 import sn.ept.git.seminaire.cicd.dto.AttachementDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.AttachementVM;
 import sn.ept.git.seminaire.cicd.mappers.AttachementMapper;
@@ -62,5 +63,11 @@ public class AttachementServiceImpl implements IAttachementService {
     @Override
     public AttachementDTO update(UUID uuid, AttachementVM vm) {
         return null;
+    }
+
+    @Transactional
+    @Override
+    public void deleteAll() {
+        repository.deleteAll();
     }
 }

@@ -1,5 +1,8 @@
 package sn.ept.git.seminaire.cicd.resources;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import sn.ept.git.seminaire.cicd.dto.TypeDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.TypeVM;
 import sn.ept.git.seminaire.cicd.models.Type;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
@@ -26,8 +30,10 @@ public class TypeResource {
     }
 
     @GetMapping(UrlMapping.Type.ALL)
-    public ResponseEntity<List<TypeDTO>> findAll() {
-        List<TypeDTO> result = service.findAll();
+    public ResponseEntity<Page<TypeDTO>> findAll(
+            @PageableDefault Pageable page
+    ) {
+        Page<TypeDTO> result = service.findAll(page);
         return ResponseEntity.ok().body(result);
     }
 
@@ -37,7 +43,7 @@ public class TypeResource {
     }
 
     @PostMapping(UrlMapping.Type.ADD)
-    public ResponseEntity<TypeDTO> create(@RequestBody TypeVM vm) {
+    public ResponseEntity<TypeDTO> create(@RequestBody @Valid TypeVM vm) {
         TypeDTO created = service.save(vm);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -56,7 +62,7 @@ public class TypeResource {
     @PutMapping(UrlMapping.Type.UPDATE)
     public ResponseEntity<TypeDTO> update(
             @PathVariable("id") UUID id,
-            @RequestBody TypeVM vm) {
+            @RequestBody @Valid TypeVM vm) {
         final TypeDTO dto = service.update(id, vm);
         Optional<TypeDTO> optional = Optional.ofNullable(dto);
         return ResponseUtil.wrapOrNotFound(optional,HttpStatus.ACCEPTED);
