@@ -71,7 +71,8 @@ pipeline {
       steps{
         script{
             withSonarQubeEnv('SonarQubeServer') {
-            sh 'mvn sonar:sonar'
+             /*sh 'mvn sonar:sonar'*/
+            echo 'Should deploy on REC env'
            }
         }  
       }
@@ -95,7 +96,8 @@ pipeline {
         script{
             sleep time: 30, unit: 'SECONDS'
             def url = 'http://178.170.114.95:8090/users-management/'
-            pingServerAfterDeployment (url)
+             /*pingServerAfterDeployment (url)*/
+             echo 'Should deploy on DEV env'
            }
        }
     }
@@ -118,7 +120,7 @@ pipeline {
         script{
             sleep time: 30, unit: 'SECONDS'
             def url = 'http://178.170.114.95:8090/users-management/'
-            pingServerAfterDeployment (url)
+            /*pingServerAfterDeployment (url)*/
            }
        }
     }
@@ -128,7 +130,7 @@ pipeline {
           branch 'release'
        }
        steps {
-          build job: 'bmdustribution-release'
+          echo 'Release On Nexus'
        }
     }
 
