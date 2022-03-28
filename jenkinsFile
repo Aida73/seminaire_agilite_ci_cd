@@ -13,6 +13,9 @@ def pingServerAfterDeployment( url){
   }
 }
 
+
+
+
 pipeline {
   agent any
 
