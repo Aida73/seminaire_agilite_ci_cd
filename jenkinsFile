@@ -1,7 +1,5 @@
 EmailReceivers = 'ibou.sene@ept.sn,dic2-git-2022@ept.sn'
 
-
-
 def pingServerAfterDeployment( url){
   def response = httpRequest url
 
@@ -13,14 +11,11 @@ def pingServerAfterDeployment( url){
   }
 }
 
-
-
-
 pipeline {
   agent any
 
     options {
-        timeout(time: 120, unit: 'MINUTES')
+        timeout(time: 15, unit: 'MINUTES')
     }
 
     tools {
