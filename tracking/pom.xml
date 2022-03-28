@@ -28,6 +28,14 @@
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
         <sonar.scm.proider>git</sonar.scm.proider>
+        <sonar.exclusions>
+            src/main/java/sn/ept/git/seminaire/cicd/**Agent**.java,\
+            src/main/java/sn/ept/git/seminaire/cicd/**Attachement**.java,\
+            src/main/java/sn/ept/git/seminaire/cicd/**Event.java**,\
+            src/main/java/sn/ept/git/seminaire/cicd/**Intervention**.java,\
+            src/main/java/sn/ept/git/seminaire/cicd/**Tool**.java,\
+            src/main/java/sn/ept/git/seminaire/cicd/**Type**.java,\
+        </sonar.exclusions>
     </properties>
 
     <dependencies>
