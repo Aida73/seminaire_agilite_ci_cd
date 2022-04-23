@@ -13,6 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>tracking</name>
     <description>Projet de tracking d'evenements</description>
+    <packaging>war</packaging>
 
     <properties>
         <java.version>17</java.version>
