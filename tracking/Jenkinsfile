@@ -5,6 +5,11 @@ pipeline {
         maven "maven"
         jdk "jdk"
     }
+    stage("Checkout Code") {
+        steps {
+            checkout scm
+        }
+    }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
