@@ -166,27 +166,27 @@ pipeline {
         success{
             emailext body: '''Votre build a été lancé avec succès !
                 $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: '$CHANGE_AUTHOR_EMAIL'
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''',recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
         
         }
         unstable{
             emailext body: '''Le build que vous venez de lancer rend le projet instable!
                 $PROJECT_NAME - Build # $BUILD_NUMBER:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: '$CHANGE_AUTHOR_EMAIL'
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''',recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
         
 
         }
         failure{
             emailext body: '''Le build que vous venez de lancer a échoué!
                 $PROJECT_NAME - Build # $BUILD_NUMBER $BUILD_STATUS:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: '$CHANGE_AUTHOR_EMAIL'
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''',recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
         
 
         }
         changed{
             emailext body: '''Le build que vous venez de lancer a été changé!
                 $PROJECT_NAME - Build # $BUILD_NUMBER $BUILD_STATUS:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: '$CHANGE_AUTHOR_EMAIL'
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
 
         }
         always {
