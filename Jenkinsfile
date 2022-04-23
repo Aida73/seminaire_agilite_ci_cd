@@ -4,7 +4,6 @@ pipeline {
     tools {
         maven "maven"
         jdk "jdk"
-        sonar "sonar"
     }
     stage("Checkout Code") {
         steps {
