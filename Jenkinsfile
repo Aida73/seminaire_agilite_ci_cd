@@ -4,6 +4,7 @@ pipeline {
     tools {
         maven "maven"
         jdk "jdk"
+        sonar "sonar"
     }
     
     environment {
