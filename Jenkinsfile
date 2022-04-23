@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        stage("Check Quality Gate"){
+        /*stage("Check Quality Gate"){
             steps{
                 timeout(time: 1, unit: 'HOURS'){
                     waitForQualityGate abortPipeline: true
@@ -71,7 +71,7 @@ pipeline {
                 }
             }
             
-        } 
+        } */
         stage("Deploy Dev"){
             when{
                 branch 'main'
