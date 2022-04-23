@@ -5,11 +5,7 @@ pipeline {
         maven "maven"
         jdk "jdk"
     }
-    stage("Checkout Code") {
-        steps {
-            checkout scm
-        }
-    }
+    
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
@@ -18,6 +14,11 @@ pipeline {
         NEXUS_CREDENTIAL_ID = "Nexus-Cred"
     }
     stages {
+        stage("Checkout Code") {
+            steps {
+                checkout scm
+            }
+        }
         stage('Init'){
               steps {
                   echo "-----------Tools Initialization------------"
