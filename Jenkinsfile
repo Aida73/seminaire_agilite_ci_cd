@@ -31,7 +31,7 @@ pipeline {
             steps {
                 dir('tracking') {
                     sh 'ls'
-                    sh "mvn clean install"                
+                    sh "mvn clean package"                
                 }
 
             }
