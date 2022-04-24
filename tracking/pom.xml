@@ -19,6 +19,7 @@
         <java.version>17</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
+        <projet.version>1.0.0</projet.version>
         <archunit-junit5.version>0.14.1</archunit-junit5.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.8</jacoco.version>
