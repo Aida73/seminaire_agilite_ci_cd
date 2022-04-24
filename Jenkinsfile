@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage("Check Quality Gate"){
             steps{
                 timeout(time: 1, unit: 'HOURS'){
@@ -72,7 +72,7 @@ pipeline {
                 }
             }
             
-        } */
+        } 
         stage("Deploy Dev"){
             when{
                 branch 'main'
