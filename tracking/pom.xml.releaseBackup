@@ -19,6 +19,7 @@
         <java.version>17</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
+        <projet.version>1.0.0</projet.version>
         <archunit-junit5.version>0.14.1</archunit-junit5.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.8</jacoco.version>
@@ -36,11 +37,6 @@
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>5.0.1</version>
         </dependency>
 
         <!-- archi test-->
@@ -179,6 +175,11 @@
             <version>3.0.0-M4</version>
         </dependency>
     </dependencies>
+    <scm>
+             <developerConnection>
+                 scm:git:git@github.com:Aida73/seminaire_agilite_ci_cd.git
+             </developerConnection>
+     </scm>
 
     <build>
         <finalName>tracking</finalName>
@@ -261,6 +262,14 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                 <groupId>org.apache.maven.plugins</groupId>
+                 <artifactId>maven-release-plugin</artifactId>
+                 <version>3.0.0-M5</version>
+                 <configuration>
+                   <tagNameFormat>v@{project.version}</tagNameFormat>
+                 </configuration>
+             </plugin>
         </plugins>
     </build>
 
