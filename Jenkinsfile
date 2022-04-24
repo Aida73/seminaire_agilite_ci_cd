@@ -91,14 +91,18 @@ pipeline {
 
             }
         }
-        stage("Test Deploy dev"){
+         stage("Test Deploy dev"){
             when{
                 branch 'main'
             }
             steps{
+
                 echo "testing if dev deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
+                final String url = "http://localhost:8888/tracking-dev/"
+                final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+                echo response
                 
             }
         }
@@ -110,6 +114,9 @@ pipeline {
                 echo "testing if rec deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
+                final String url = "http://localhost:8888/tracking-rec/"
+                final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+                echo response
                 
             }
         }
