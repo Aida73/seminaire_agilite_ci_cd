@@ -140,16 +140,11 @@ class SiteServiceTest extends ServiceBaseTest {
     }
 
 
-    @Test
-    void update_Site_shoudReturnUpdatedSite(){
-        SiteDTO site = service.update(UUID.randomUUID(),vm);
-        assertThat(site)
-                .isNotNull();
+
+
+
+
 }
-
-
-
-    }
 
 
 /*
@@ -158,4 +153,3 @@ class SiteServiceTest extends ServiceBaseTest {
 */
 
 
-}
