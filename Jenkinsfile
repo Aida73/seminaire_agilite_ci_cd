@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        /*
+        
         stage("Check Quality Gate"){
             steps{
                 timeout(time: 1, unit: 'HOURS'){
@@ -72,7 +72,7 @@ pipeline {
                 }
             }
             
-        } */
+        } 
         stage("Deploy Dev"){
             when{
                 branch 'main'
@@ -100,11 +100,11 @@ pipeline {
                 echo "testing if dev deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
-                script{
+                /*script{
                       final String url = "http://localhost:8888/tracking-dev/"
                       final String response = sh(script: "curl -s $url", returnStdout: true).trim()
                       echo response
-                }
+                }*/
               
                 
             }
