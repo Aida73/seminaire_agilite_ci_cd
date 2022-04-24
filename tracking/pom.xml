@@ -181,7 +181,7 @@
     </dependencies>
 
     <build>
-        <finalName>tracking</finalName>
+        <finalName>tracking-dev</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
