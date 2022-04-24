@@ -175,6 +175,11 @@
             <version>3.0.0-M4</version>
         </dependency>
     </dependencies>
+    <scm>
+             <developerConnection>
+                 scm:git:git@github.com:Aida73/seminaire_agilite_ci_cd.git
+             </developerConnection>
+     </scm>
 
     <build>
         <finalName>tracking</finalName>
