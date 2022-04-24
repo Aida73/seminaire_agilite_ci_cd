@@ -9,7 +9,11 @@
     </parent>
     <groupId>sn.ept.git.seminaire.cicd</groupId>
     <artifactId>tracking</artifactId>
+<<<<<<< HEAD
     <version>0.0.1</version>
+=======
+    <version>1.0.0</version>
+>>>>>>> a4c9d029e5f7ee1821832b82bfaa2d4602c63026
     <name>tracking</name>
     <description>Projet de tracking d'evenements</description>
     <packaging>war</packaging>
@@ -174,6 +178,7 @@
             <version>3.0.0-M4</version>
         </dependency>
     </dependencies>
+<<<<<<< HEAD
     <scm>
              <developerConnection>
                  scm:git:git@github.com:Aida73/seminaire_agilite_ci_cd.git
@@ -181,6 +186,8 @@
        <tag>v0.0.1</tag>
   </scm>
 
+=======
+>>>>>>> a4c9d029e5f7ee1821832b82bfaa2d4602c63026
     <build>
         <finalName>tracking</finalName>
         <plugins>
