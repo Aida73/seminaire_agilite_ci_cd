@@ -99,10 +99,10 @@ pipeline {
                 echo "testing if dev deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
-                final String url = "http://localhost:8888/tracking-dev/"
+                /*final String url = "http://localhost:8888/tracking-dev/"
                 final String response = sh(script: "curl -s $url", returnStdout: true).trim()
                 echo response
-                
+                */
             }
         }
         stage("Test Deploy rec"){
@@ -113,10 +113,10 @@ pipeline {
                 echo "testing if rec deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
-                final String url = "http://localhost:8888/tracking-rec/"
+                /*final String url = "http://localhost:8888/tracking-rec/"
                 final String response = sh(script: "curl -s $url", returnStdout: true).trim()
                 echo response
-                
+                */
             }
         }
         stage("Install On Nexus"){
