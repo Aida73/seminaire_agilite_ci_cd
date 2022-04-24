@@ -5,22 +5,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.SiteVMTestData;
-import sn.ept.git.seminaire.cicd.data.SocieteVMTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
 import sn.ept.git.seminaire.cicd.dto.SiteDTO;
-import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.SiteVM;
-import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
 import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
 import sn.ept.git.seminaire.cicd.exceptions.ItemNotFoundException;
 import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
-import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.SiteVMMapper;
-import sn.ept.git.seminaire.cicd.mappers.vm.SocieteVMMapper;
 import sn.ept.git.seminaire.cicd.models.Site;
-import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.SiteRepository;
-import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -40,7 +35,7 @@ class SiteServiceTest extends ServiceBaseTest {
     @Autowired
     protected SiteVMMapper vmMapper;
     @Autowired
-    SiteRepository societeRepository;
+    SiteRepository siteRepository;
     @Autowired
     ISiteService service;
     Optional<Site> societe;
@@ -120,11 +115,11 @@ class SiteServiceTest extends ServiceBaseTest {
     }
 
     @Test
-    void delete_shouldDeleteSociete() {
+    void delete_shouldDeleteSite() {
         dto = service.save(vm);
-        long oldCount = societeRepository.count();
+        long oldCount = siteRepository.count();
         service.delete(dto.getId());
-        long newCount = societeRepository.count();
+        long newCount = siteRepository.count();
         assertThat(oldCount).isEqualTo(newCount+1);
     }
 
@@ -135,6 +130,27 @@ class SiteServiceTest extends ServiceBaseTest {
                 () ->service.delete(UUID.randomUUID())
         );
     }
+    @Test
+    void find_all_ShouldReturnSites(){
+        final List<SiteDTO> optional = service.findAll();
+        assertThat(optional)
+                .isNotEmpty()
+                .size().isGreaterThan(0);
+
+    }
+
+
+    @Test
+    void update_Site_shoudReturnUpdatedSite(){
+        SiteDTO site = service.update(UUID.randomUUID(),vm);
+        assertThat(site)
+                .isNotNull();
+}
+
+
+
+    }
+
 
 /*
     findAll

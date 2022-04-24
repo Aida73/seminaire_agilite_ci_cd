@@ -30,7 +30,7 @@ class ExerciceRepositoryTest extends RepositoryBaseTest {
 
     static ExerciceDTO dto;
     Exercice entity;
-    Optional<Exercice> optionalSociete;
+    Optional<Exercice> optionalExercice;
 
     @BeforeAll
     static void beforeAll(){
@@ -45,14 +45,28 @@ class ExerciceRepositoryTest extends RepositoryBaseTest {
     }
 
     @Test
-    void findByName_shouldRetrunResult() {
-        optionalSociete = repository.findByDates(Instant.now(),Instant.now());
-        assertThat(optionalSociete)
+    void findByName_shouldReturnResult() {
+        optionalExercice= repository.findByDates(Instant.now(),Instant.now());
+        assertThat(optionalExercice)
                 .isNotNull()
                 .isPresent()
                 .get()
                 .usingRecursiveComparison()
                 .isEqualTo(entity);
     }
+
+    @Test
+    void FindByBadDates_thenNotFound() {
+        optionalExercice = repository.findByDates(
+                Instant.ofEpochSecond(UUID.randomUUID().timestamp()),
+                Instant.ofEpochSecond(UUID.randomUUID().timestamp()));
+        assertThat(optionalExercice)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+
+
 
 }

@@ -77,6 +77,16 @@ class SiteRepositoryTest extends RepositoryBaseTest {
                 .isEqualTo(entity);
     }
 
+    @Test
+    void findByNameWithIdDifferent_withSameId_shouldReturnNoResult() {
+        optionalSite = repository.findByNameWithIdDifferent(entity.getName(),entity.getId());
+        assertThat(optionalSite)
+                .isNotNull()
+                .isNotPresent();
+    }
+
+
+
 
 
 }

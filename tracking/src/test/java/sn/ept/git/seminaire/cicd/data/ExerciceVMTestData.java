@@ -1,7 +1,6 @@
 package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.vm.ExerciceVM;
-import sn.ept.git.seminaire.cicd.models.Exercice;
 
 import java.time.Instant;
 
