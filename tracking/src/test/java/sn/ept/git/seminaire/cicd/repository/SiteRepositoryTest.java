@@ -62,6 +62,58 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
                 .usingRecursiveComparison()
                 .isEqualTo(entity);
     }
+    @Test
+    void FindByPhone_thenResult() {
+        optionalSite = repository.findByName(entity.getPhone());
+        assertThat(optionalSite)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(entity);
+    }
+
+    @Test
+    void FindByEmail_thenResult() {
+        optionalSite = repository.findByName(entity.getEmail());
+        assertThat(optionalSite)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(entity);
+    }
+    @Test
+    void FindBySociete_thenResult() {
+        optionalSite = repository.findByName(String.valueOf(entity.getSociete()));
+        assertThat(optionalSite)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(entity);
+    }
+
+    @Test
+    void FindByLatitude_thenResult() {
+        optionalSite = repository.findByName(String.valueOf(entity.getLatitude()));
+        assertThat(optionalSite)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(entity);
+    }
+    @Test
+    void FindByLongitude_thenResult() {
+        optionalSite = repository.findByName(String.valueOf(entity.getLatitude()));
+        assertThat(optionalSite)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .usingRecursiveComparison()
+                .isEqualTo(entity);
+    }
 
     @Test
     void FindByBadName_thenNotFound() {
