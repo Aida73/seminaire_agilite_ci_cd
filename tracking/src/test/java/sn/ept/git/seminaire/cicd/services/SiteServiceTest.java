@@ -59,7 +59,11 @@ class SiteServiceTest extends ServiceBaseTest {
         dto =service.save(vm);
         assertThat(dto)
                 .isNotNull()
-                .hasNoNullFieldsOrProperties();
+                .hasNoNullFieldsOrProperties()
+                .isInstanceOf(SiteDTO.class)
+                .isExactlyInstanceOf(SiteDTO.class)
+                .isNotInstanceOf(Site.class)
+                .isInstanceOfAny(Site.class, SiteDTO.class, SiteVM.class);
     }
 
     @Test
