@@ -5,15 +5,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.ExerciceDTOTestData;
-import sn.ept.git.seminaire.cicd.data.SocieteDTOTestData;
 import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
-import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
+
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
-import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
-import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
-import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -21,7 +17,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ExerciceRepositoryTest extends RepositoryBaseTest {
+public class ExerciceRepositoryTest extends RepositoryBaseTest{
 
     @Autowired
     private ExerciceMapper mapper;
@@ -33,7 +29,7 @@ class ExerciceRepositoryTest extends RepositoryBaseTest {
     Optional<Exercice> optionalExercice;
 
     @BeforeAll
-    static void beforeAll(){
+    static void beforeAll() {
         dto = ExerciceDTOTestData.defaultDTO();
     }
 
@@ -45,8 +41,8 @@ class ExerciceRepositoryTest extends RepositoryBaseTest {
     }
 
     @Test
-    void findByName_shouldReturnResult() {
-        optionalExercice= repository.findByDates(Instant.now(),Instant.now());
+    void FindByDates_thenResult() {
+        optionalExercice = repository.findByDates(entity.getStart(), entity.getEnd());
         assertThat(optionalExercice)
                 .isNotNull()
                 .isPresent()
@@ -65,8 +61,5 @@ class ExerciceRepositoryTest extends RepositoryBaseTest {
                 .isNotPresent();
 
     }
-
-
-
 
 }

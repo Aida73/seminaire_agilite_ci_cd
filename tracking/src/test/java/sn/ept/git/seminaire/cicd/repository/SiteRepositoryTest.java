@@ -56,16 +56,10 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
     void FindByName_thenResult() {
         optionalSite = repository.findByName(entity.getName());
         assertThat(optionalSite)
+                .isNotNull()
                 .isPresent()
                 .get()
                 .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
-    @Test
-    void FindByName_NotNullthenResult() {
-        optionalSite = repository.findByName(entity.getName());
-        assertThat(optionalSite)
-                .isNotNull()
                 .isEqualTo(entity);
     }
 
@@ -77,14 +71,6 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
                 .isNotPresent();
     }
 
-    @Test
-    void FindDeleted() {
-        entity.setDeleted(true);
-        entity = repository.saveAndFlush(entity);
-        optionalSite = repository.findByName(entity.getName());
-        assertThat(optionalSite)
-                .isNotNull();
-    }
     @Test
     void FindDeleted_thenNotFound() {
         entity.setDeleted(true);

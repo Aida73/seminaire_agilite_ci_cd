@@ -1,4 +1,5 @@
 package sn.ept.git.seminaire.cicd.services;
+
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,29 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.ExerciceVMTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
 import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
-import sn.ept.git.seminaire.cicd.dto.SiteDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.ExerciceVM;
 import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
-import sn.ept.git.seminaire.cicd.exceptions.ItemNotFoundException;
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.ExerciceVMMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/*@SqlGroup({
-        @Sql("classpath:0_societe_data_test.sql"),
-        @Sql("classpath:1_societe_data_test.sql"),
-        @Sql("classpath:2_societe_data_test.sql"),
-})*/
 @Slf4j
-class ExerciceServiceTest extends ServiceBaseTest {
+public class ExerciceServiceTest extends ServiceBaseTest{
 
     @Autowired
     protected ExerciceMapper mapper;
@@ -39,10 +31,9 @@ class ExerciceServiceTest extends ServiceBaseTest {
     ExerciceRepository exerciceRepository;
     @Autowired
     IExerciceService service;
-    Optional<Exercice> societe;
+    Optional<Exercice> exercice;
     static ExerciceVM vm ;
     ExerciceDTO dto;
-
 
     @BeforeAll
     static void beforeAll(){
@@ -56,7 +47,7 @@ class ExerciceServiceTest extends ServiceBaseTest {
     }
 
     @Test
-    void save_shouldSaveSociete() {
+    void save_shouldSaveExercice() {
         dto =service.save(vm);
         assertThat(dto)
                 .isNotNull()
@@ -64,41 +55,22 @@ class ExerciceServiceTest extends ServiceBaseTest {
     }
 
     @Test
-    void delete_withBadId_ShouldThrowException() {
+    void save_withSameName_shouldThrowException() {
+        dto =service.save(vm);
+        vm.setName(TestData.Update.name);
+        vm.setStatus(TestData.Update.status);
         assertThrows(
-                ItemNotFoundException.class,
-                () ->service.delete(UUID.randomUUID())
+                ItemExistsException.class,
+                () -> service.save(vm)
         );
     }
 
-
     @Test
-    void findAllSociete_ShouldReturnExercices() {
-        final List<ExerciceDTO> exercices = service.findAll();
-        assertThat(exercices)
-                .isEmpty();
+    void delete_shouldDeleteExercice() {
+        dto = service.save(vm);
+        long oldCount = exerciceRepository.count();
+        service.delete(dto.getId());
+        long newCount = exerciceRepository.count();
+        assertThat(oldCount).isEqualTo(newCount+1);
     }
-
-    @Test
-    void updateSociete_verifyID(){
-        final Optional<ExerciceDTO> optional = service.findById(UUID.randomUUID());
-        assertThat(optional)
-                .isNotNull();
-    }
-
-    @Test
-    void findAll_shouldReturnExercicesListPagination() {
-        List<ExerciceDTO> exercices= service.findAll();
-        assertThat(exercices)
-                .isNotEmpty();
-    }
-    @Test
-    void findAll_shouldReturnSitesListPagination() {
-        List<ExerciceDTO> exercices= service.findAll();
-        assertThat(exercices)
-                .isNotEmpty();
-    }
-
-
-
 }
