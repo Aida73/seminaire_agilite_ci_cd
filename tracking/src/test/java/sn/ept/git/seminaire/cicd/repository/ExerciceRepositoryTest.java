@@ -9,7 +9,6 @@ import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
 
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
-import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
 
 import java.time.Instant;

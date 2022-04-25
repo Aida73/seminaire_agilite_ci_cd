@@ -18,7 +18,6 @@ import sn.ept.git.seminaire.cicd.utils.UrlMapping;
 
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

@@ -1,9 +1,7 @@
 package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.vm.SiteVM;
-import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
 
-import java.util.UUID;
 
 
 public final class SiteVMTestData extends TestData {

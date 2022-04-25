@@ -1,8 +1,6 @@
 package sn.ept.git.seminaire.cicd.mapper;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.SocieteVMTestData;

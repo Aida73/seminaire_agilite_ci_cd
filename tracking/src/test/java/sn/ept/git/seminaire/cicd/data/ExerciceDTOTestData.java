@@ -1,11 +1,8 @@
 package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
-import sn.ept.git.seminaire.cicd.dto.SiteDTO;
-import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 
 import java.time.Instant;
-import java.util.Date;
 
 public final class ExerciceDTOTestData extends TestData{
 
