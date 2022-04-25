@@ -57,7 +57,7 @@ pipeline {
                 }
             }
         }
-        /*stage("Check Quality Gate"){
+        stage("Check Quality Gate"){
             steps{
                 timeout(time: 1, unit: 'HOURS'){
                     waitForQualityGate abortPipeline: true
@@ -71,7 +71,7 @@ pipeline {
                 }
             }
             
-        } */
+        } 
         stage("Deploy Dev"){
             when{
                 branch 'main'
@@ -109,6 +109,14 @@ pipeline {
                 echo "testing if rec deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
+                script {
+                    final String url = "http://localhost:8888/tracking-dev/"
+
+                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+
+                    echo response
+                
+                }
                 
             }
         }
