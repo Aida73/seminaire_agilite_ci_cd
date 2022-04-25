@@ -15,6 +15,8 @@ import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.ExerciceVMMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -69,10 +71,34 @@ class ExerciceServiceTest extends ServiceBaseTest {
         );
     }
 
-/*
-    findAll
-    update
-*/
+
+    @Test
+    void findAllSociete_ShouldReturnExercices() {
+        final List<ExerciceDTO> exercices = service.findAll();
+        assertThat(exercices)
+                .isEmpty();
+    }
+
+    @Test
+    void updateSociete_verifyID(){
+        final Optional<ExerciceDTO> optional = service.findById(UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull();
+    }
+
+    @Test
+    void findAll_shouldReturnExercicesListPagination() {
+        List<ExerciceDTO> exercices= service.findAll();
+        assertThat(exercices)
+                .isNotEmpty();
+    }
+    @Test
+    void findAll_shouldReturnSitesListPagination() {
+        List<ExerciceDTO> exercices= service.findAll();
+        assertThat(exercices)
+                .isNotEmpty();
+    }
+
 
 
 }

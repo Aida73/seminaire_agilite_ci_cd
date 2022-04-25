@@ -4,11 +4,15 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
+import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
+import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.data.SiteDTOTestData;
 import sn.ept.git.seminaire.cicd.dto.SiteDTO;
 import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
 import sn.ept.git.seminaire.cicd.models.Site;
 import sn.ept.git.seminaire.cicd.repositories.SiteRepository;
+import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,15 +27,15 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
     private SiteRepository repository;
 
     @Autowired
-    private SiteRepository siteRepository;
+    private SocieteRepository societeRepository;
 
-   Site siteEntity;
+    Societe societeEntity;
 
     static SiteDTO dto;
-    static SiteDTO siteDTO;
+    static SocieteDTO societeDTO;
 
     @Autowired
-    private SiteMapper siteMapper;
+    private SocieteMapper societeMapper;
 
     Site entity;
     Optional<Site> optionalSite;
@@ -52,20 +56,16 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
     void FindByName_thenResult() {
         optionalSite = repository.findByName(entity.getName());
         assertThat(optionalSite)
-                .isNotNull()
                 .isPresent()
                 .get()
                 .usingRecursiveComparison()
                 .isEqualTo(entity);
     }
     @Test
-    void FindBySociete_thenResult() {
+    void FindByName_NotNullthenResult() {
         optionalSite = repository.findByName(entity.getName());
         assertThat(optionalSite)
                 .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
                 .isEqualTo(entity);
     }
 
@@ -77,6 +77,14 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
                 .isNotPresent();
     }
 
+    @Test
+    void FindDeleted() {
+        entity.setDeleted(true);
+        entity = repository.saveAndFlush(entity);
+        optionalSite = repository.findByName(entity.getName());
+        assertThat(optionalSite)
+                .isNotNull();
+    }
     @Test
     void FindDeleted_thenNotFound() {
         entity.setDeleted(true);
@@ -104,12 +112,5 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
         assertThat(optionalSite)
                 .isNotNull()
                 .isNotPresent();
-    }
-
-    @Test
-    void findByNameWithIdDifferent_withSameId() {
-        optionalSite = repository.findByNameWithIdDifferent(entity.getName(),entity.getId());
-        assertThat(optionalSite)
-                .isNotNull();
     }
 }

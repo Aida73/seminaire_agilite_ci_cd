@@ -1,24 +1,23 @@
 package sn.ept.git.seminaire.cicd.mapper;
 
-import sn.ept.git.seminaire.cicd.data.SiteDTOTestData;
-import sn.ept.git.seminaire.cicd.data.SocieteDTOTestData;
-import sn.ept.git.seminaire.cicd.dto.SiteDTO;
-import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
-import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
-import sn.ept.git.seminaire.cicd.models.Site;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import sn.ept.git.seminaire.cicd.data.SiteDTOTestData;
+import sn.ept.git.seminaire.cicd.dto.SiteDTO;
+import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
+import sn.ept.git.seminaire.cicd.models.Site;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SiteDTOMapperTest extends  MapperBaseTest{
+public class SiteDTOMapperTest extends MapperBaseTest{
 
     SiteDTO dto;
+
     Site entity;
 
     @Autowired
     private SiteMapper mapper;
-
 
     @BeforeEach
     void setUp() {
@@ -31,24 +30,24 @@ class SiteDTOMapperTest extends  MapperBaseTest{
         assertThat(entity)
                 .isNotNull()
                 .usingRecursiveComparison()
-                .ignoringFields("interventions", "agents","societe")
+                .ignoringFields(
+                        "interventions", "agents", "societe"
+                )
                 .isEqualTo(dto);
     }
 
     @Test
     void toDTOShouldReturnCorrectDTO() {
         entity = mapper.asEntity(dto);
-        dto =mapper.asDTO(entity);
+        dto = mapper.asDTO(entity);
         assertThat(dto)
                 .isNotNull()
                 .hasNoNullFieldsOrProperties()
                 .usingRecursiveComparison()
-                .ignoringFieldsMatchingRegexes("^_")//just to discover
-                .withEqualsForFields((idOne,idTwo)-> {
-                    //use lambda
-                    return  idOne instanceof String && idTwo.toString().equalsIgnoreCase(idOne.toString());
-                },"id") //just to discover
+                .ignoringFieldsMatchingRegexes("^_")
+                .withEqualsForFields((idOne, idTwo) -> {
+                    return idOne instanceof String && idTwo.toString().equalsIgnoreCase(idOne.toString());
+                }, "id")
                 .isEqualTo(entity);
-
     }
 }

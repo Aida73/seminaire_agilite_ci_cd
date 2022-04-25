@@ -2,39 +2,36 @@ package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.vm.ExerciceVM;
 
-import java.time.Instant;
+public class ExerciceVMTestData extends TestData {
 
-public final class ExerciceVMTestData extends TestData {
-
-    public static ExerciceVM defaultVM() {
+    public  static ExerciceVM defaultVM(){
         return ExerciceVM
                 .builder()
                 .id(Default.id)
+                .createdDate(Default.createdDate)
                 .lastModifiedDate(Default.lastModifiedDate)
+                .enabled(Default.enabled)
                 .version(Default.version)
                 .deleted(Default.deleted)
-                .enabled(Default.enabled)
                 .name(Default.name)
-                .createdDate(Default.createdDate)
-                .start(Instant.now())
-                .end(Instant.now())
-                .status(null)
+                .start(Default.start)
+                .end(Default.end)
+                .status(Default.status)
+                .idSociete(Default.idSociete)
                 .build();
     }
 
-    public static ExerciceVM updatedVM() {
+    public  static ExerciceVM updateVM(){
         return ExerciceVM
                 .builder()
                 .id(Default.id)
-                .lastModifiedDate(Default.lastModifiedDate)
-                .version(Default.version)
-                .deleted(Default.deleted)
-                .enabled(Default.enabled)
-                .name(Default.name)
-                .createdDate(Default.createdDate)
-                .start(Instant.now())
-                .end(Instant.now())
-                .status(null)
+                .createdDate(Update.createdDate)
+                .lastModifiedDate(Update.lastModifiedDate)
+                .enabled(Update.enabled)
+                .version(Update.version)
+                .deleted(Update.deleted)
+                .name(Update.name)
+                .status(Update.status)
                 .build();
     }
 }

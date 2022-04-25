@@ -19,6 +19,7 @@ public final class SiteDTOTestData extends TestData{
                 .name(Default.name)
                 .createdDate(Default.createdDate)
                 .email(Default.email)
+                .societe(Default.societe)
                 .build();
 
     }

@@ -1,6 +1,10 @@
 package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.vm.SiteVM;
+import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
+
+import java.util.UUID;
+
 
 public final class SiteVMTestData extends TestData {
 
@@ -18,13 +22,14 @@ public final class SiteVMTestData extends TestData {
                 .email(Default.email)
                 .longitude(Default.longitude)
                 .latitude(Default.latitude)
+                .idSociete(Default.idSociete)
                 .build();
     }
 
     public static SiteVM updatedVM() {
         return SiteVM
                 .builder()
-                .id(Default.id)
+                .id(Update.id)
                 .createdDate(Update.createdDate)
                 .lastModifiedDate(Update.lastModifiedDate)
                 .version(Update.version)
@@ -35,6 +40,7 @@ public final class SiteVMTestData extends TestData {
                 .email(Update.email)
                 .longitude(Update.longitude)
                 .latitude(Update.latitude)
+                .idSociete(Default.idSociete)
                 .build();
     }
 }

@@ -9,6 +9,8 @@ import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -165,6 +167,28 @@ class SocieteRepositoryTest extends RepositoryBaseTest {
         assertThat(optionalSociete)
                 .isNotNull()
                 .isNotPresent();
+    }
+    @Test
+    void findAll_shouldReturnSocietesList() {
+        List<Societe> societes = repository.findAll();
+        assertThat(societes)
+                .isNotEmpty();
+    }
+    @Test
+    void findAll_shouldReturnSocietesListPagination() {
+        List<Societe> societes = repository.findAll();
+        assertThat(societes)
+                .isNotEmpty();
+
+
+    }
+    @Test
+    void findAll_shouldReturnSocietesListSorted() {
+        List<Societe> societes = repository.findAll();
+        assertThat(societes)
+                .isNotEmpty();
+
+
     }
 
 }

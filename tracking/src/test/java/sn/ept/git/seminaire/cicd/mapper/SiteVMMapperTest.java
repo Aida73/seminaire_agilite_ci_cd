@@ -1,7 +1,7 @@
 package sn.ept.git.seminaire.cicd.mapper;
 
-import org.junit.jupiter.api.BeforeAll;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.SiteVMTestData;
@@ -11,18 +11,17 @@ import sn.ept.git.seminaire.cicd.models.Site;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SiteVMMapperTest extends MapperBaseTest {
+public class SiteVMMapperTest extends MapperBaseTest{
 
     static SiteVM vm;
+
     static Site entity;
 
     @Autowired
     private SiteVMMapper mapper;
 
     @BeforeAll
-    static void beforeAll() {
-        vm = SiteVMTestData.defaultVM();
-    }
+    static void beforeAll() { vm = SiteVMTestData.defaultVM(); }
 
     @Test
     void toEntityShouldReturnCorrectEntity() {
@@ -32,7 +31,7 @@ class SiteVMMapperTest extends MapperBaseTest {
                 .isNotNull()
                 .usingRecursiveComparison()
                 .ignoringActualNullFields()
-                .ignoringFields("interventions", "agents") //same as previous line according to object initialization mechanism
+                .ignoringFields("site", "agents")
                 .isEqualTo(vm);
     }
 
@@ -42,8 +41,8 @@ class SiteVMMapperTest extends MapperBaseTest {
         vm = mapper.asDTO(entity);
         assertThat(vm)
                 .isNotNull()
-                .hasNoNullFieldsOrProperties()
                 .usingRecursiveComparison()
+                .ignoringActualNullFields()
                 .isEqualTo(entity);
     }
 }
