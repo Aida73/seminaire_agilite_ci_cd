@@ -57,7 +57,6 @@ pipeline {
                 }
             }
         }
-        /*
         stage("Check Quality Gate"){
             steps{
                 timeout(time: 1, unit: 'HOURS'){
@@ -72,7 +71,7 @@ pipeline {
                 }
             }
             
-        } */
+        } 
         stage("Deploy Dev"){
             when{
                 branch 'main'
@@ -96,9 +95,16 @@ pipeline {
                 branch 'main'
             }
             steps{
-                echo "testing if dev deployment is successfully done"
-                sleep(time:1,unit:"MINUTES") 
-                echo "Run test"
+                script{
+                    echo "testing if dev deployment is successfully done"
+                    sleep(time:1,unit:"MINUTES") 
+                    echo "Run test"
+                    final String url = "http://localhost:8888/tracking-dev/"
+                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+                    echo response
+                    
+                }
+
                 
             }
         }
@@ -110,6 +116,14 @@ pipeline {
                 echo "testing if rec deployment is successfully done"
                 sleep(time:1,unit:"MINUTES") 
                 echo "Run test"
+                script {
+                    final String url = "http://localhost:8888/tracking-dev/"
+
+                    final String response = sh(script: "curl -s $url", returnStdout: true).trim()
+
+                    echo response
+                
+                }
                 
             }
         }
@@ -168,14 +182,13 @@ pipeline {
         success{
             emailext body: '''Votre build a été lancé avec succès !
                 $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''',recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
         
         }
         unstable{
             emailext body: '''Le build que vous venez de lancer rend le projet instable!
                 $PROJECT_NAME - Build # $BUILD_NUMBER:
-                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
-        
+                Pour plus de détails cliquer sur ce lien: $BUILD_URL.''',recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!'
 
         }
         failure{
