@@ -9,9 +9,11 @@ import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
 
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
+import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -60,6 +62,70 @@ public class ExerciceRepositoryTest extends RepositoryBaseTest{
                 .isNotNull()
                 .isNotPresent();
 
+    }
+
+    @Test
+    void findAll_shouldReturnExercicesListSorted() {
+        List<Exercice> exercices= repository.findAll();
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void findAll_shouldReturnExercicesListPage() {
+        List<Exercice> exercices= repository.findAll();
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+
+    @Test
+    void findByName_shouldReturnExercicesListPage() {
+        Optional<Exercice> exercices= repository.findByName(entity.getName());
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void findByStart_shouldReturnExercicesListPage() {
+        Optional<Exercice> exercices= repository.findByStart(entity.getStart());
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void findByEnd_shouldReturnExercicesListPage() {
+        Optional<Exercice> exercices= repository.findByEnd(entity.getEnd());
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void findBySociete_shouldReturnExercicesListPage() {
+        Optional<Exercice> exercices= repository.findBySociete(entity.getSociete());
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void findByStatus_shouldReturnExercicesListPage() {
+        Optional<Exercice> exercices= repository.findByStatus(entity.getStatus());
+        assertThat(exercices)
+                .isNotEmpty();
+
+    }
+
+    @Test
+    void updateSociete_shouldReturnNewSociete() {
+        optionalExercice = repository.findById(UUID.randomUUID());
+        assertThat(optionalExercice)
+                .isNotEmpty();
     }
 
 }
