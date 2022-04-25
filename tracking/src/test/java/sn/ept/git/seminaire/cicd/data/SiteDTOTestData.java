@@ -1,7 +1,6 @@
 package sn.ept.git.seminaire.cicd.data;
 
 import sn.ept.git.seminaire.cicd.dto.SiteDTO;
-import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 
 public class SiteDTOTestData extends TestData{
 
