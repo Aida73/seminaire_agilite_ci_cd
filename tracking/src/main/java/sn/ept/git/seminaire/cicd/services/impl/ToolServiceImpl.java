@@ -91,34 +91,4 @@ public class ToolServiceImpl implements IToolService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
-    @Override
-    public Optional<ToolDTO> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ToolDTO> findByPhone(String phone) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ToolDTO> findByEmail(String email) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ToolDTO> findByAddresse(String addresse) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ToolDTO> findByLatitude(float latitude) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<ToolDTO> findByLongitude(float longitude) {
-        return Optional.empty();
-    }
 }

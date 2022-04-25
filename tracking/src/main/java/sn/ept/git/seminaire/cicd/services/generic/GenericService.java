@@ -24,7 +24,7 @@ public interface GenericService<D,V, I> {
 
     void deleteAll();
 
-    Optional<D> findByName(String name);
+   /* Optional<D> findByName(String name);
 
     Optional<D> findByPhone(String phone);
 
@@ -34,5 +34,5 @@ public interface GenericService<D,V, I> {
 
     Optional<D> findByLatitude(float latitude);
 
-    Optional<D> findByLongitude(float longitude);
+    Optional<D> findByLongitude(float longitude);*/
 }

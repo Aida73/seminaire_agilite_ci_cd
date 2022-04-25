@@ -16,37 +16,34 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SiteRepositoryTest extends RepositoryBaseTest {
+class SiteRepositoryTest extends RepositoryBaseTest {
 
     @Autowired
     private SiteMapper mapper;
     @Autowired
     private SiteRepository repository;
 
-
-
-
     static SiteDTO dto;
-
-
-
     Site entity;
     Optional<Site> optionalSite;
 
     @BeforeAll
-    static  void beforeAll() {
+    static void beforeAll(){
         dto = SiteDTOTestData.defaultDTO();
     }
 
     @BeforeEach
     void setUp() {
-        repository.deleteAll();
         entity = mapper.asEntity(dto);
+        repository.deleteAll();
         entity = repository.saveAndFlush(entity);
+
     }
 
+
+
     @Test
-    void FindByName_thenResult() {
+    void findByName_shouldRetrunResult() {
         optionalSite = repository.findByName(entity.getName());
         assertThat(optionalSite)
                 .isNotNull()
@@ -55,61 +52,9 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
                 .usingRecursiveComparison()
                 .isEqualTo(entity);
     }
-    @Test
-    void FindByPhone_thenResult() {
-        optionalSite = repository.findByName(entity.getPhone());
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
 
     @Test
-    void FindByEmail_thenResult() {
-        optionalSite = repository.findByName(entity.getEmail());
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
-    @Test
-    void FindBySociete_thenResult() {
-        optionalSite = repository.findByName(String.valueOf(entity.getSociete()));
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
-
-    @Test
-    void FindByLatitude_thenResult() {
-        optionalSite = repository.findByName(String.valueOf(entity.getLatitude()));
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
-    @Test
-    void FindByLongitude_thenResult() {
-        optionalSite = repository.findByName(String.valueOf(entity.getLatitude()));
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
-
-    @Test
-    void FindByBadName_thenNotFound() {
+    void findByName_withBadName_shouldReturnNotFound() {
         optionalSite = repository.findByName(UUID.randomUUID().toString());
         assertThat(optionalSite)
                 .isNotNull()
@@ -117,7 +62,7 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
     }
 
     @Test
-    void FindDeleted_thenNotFound() {
+    void findByName_afterDelete_shouldReturnNotFound() {
         entity.setDeleted(true);
         entity = repository.saveAndFlush(entity);
         optionalSite = repository.findByName(entity.getName());
@@ -126,36 +71,32 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
                 .isNotPresent();
     }
 
-    @Test
-    void findByNameWithIdDifferent_thenResult() {
-        optionalSite = repository.findByNameWithIdDifferent(entity.getName(),UUID.randomUUID());
-        assertThat(optionalSite)
-                .isNotNull()
-                .isPresent()
-                .get()
-                .usingRecursiveComparison()
-                .isEqualTo(entity);
-    }
+
+
 
     @Test
-    void findByNameWithIdDifferent_withSameId_shouldReturnNoResult() {
-        optionalSite = repository.findByNameWithIdDifferent(entity.getName(),entity.getId());
-        assertThat(optionalSite)
-                .isNotNull()
-                .isNotPresent();
-    }
-
-    @Test
-    void findBySociete() {
-        List<Site> optionalsite = repository.findBySociete(entity.getSociete());
-        assertThat(optionalSite)
+    void findAll_shouldReturnSitesList() {
+        List<Site> Sites = repository.findAll();
+        assertThat(Sites)
                 .isNotEmpty();
     }
     @Test
-    void findAllSites() {
-        List<Site> optionalsite = repository.findAll();
-        assertThat(optionalSite)
+    void findAll_shouldReturnSitesListPagination() {
+        List<Site> Sites = repository.findAll();
+        assertThat(Sites)
+                .isNotEmpty();
+
+
+    }
+    @Test
+    void findAll_shouldReturnSitesListSorted() {
+        List<Site> Sites = repository.findAll();
+        assertThat(Sites)
                 .isNotEmpty();
 
     }
+
+
+
+
 }

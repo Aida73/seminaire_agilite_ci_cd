@@ -112,34 +112,4 @@ public class SiteServiceImpl implements ISiteService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
-    @Override
-    public Optional<SiteDTO> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<SiteDTO> findByPhone(String phone) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<SiteDTO> findByEmail(String email) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<SiteDTO> findByAddresse(String addresse) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<SiteDTO> findByLatitude(float latitude) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<SiteDTO> findByLongitude(float longitude) {
-        return Optional.empty();
-    }
 }

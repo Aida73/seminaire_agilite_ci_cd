@@ -70,34 +70,4 @@ public class AttachementServiceImpl implements IAttachementService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
-    @Override
-    public Optional<AttachementDTO> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AttachementDTO> findByPhone(String phone) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AttachementDTO> findByEmail(String email) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AttachementDTO> findByAddresse(String addresse) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AttachementDTO> findByLatitude(float latitude) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AttachementDTO> findByLongitude(float longitude) {
-        return Optional.empty();
-    }
 }

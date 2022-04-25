@@ -92,34 +92,4 @@ public class TypeServiceImpl implements ITypeService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
-    @Override
-    public Optional<TypeDTO> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TypeDTO> findByPhone(String phone) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TypeDTO> findByEmail(String email) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TypeDTO> findByAddresse(String addresse) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TypeDTO> findByLatitude(float latitude) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<TypeDTO> findByLongitude(float longitude) {
-        return Optional.empty();
-    }
 }

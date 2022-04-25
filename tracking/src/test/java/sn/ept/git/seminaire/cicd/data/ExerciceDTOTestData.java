@@ -19,7 +19,8 @@ public final class ExerciceDTOTestData extends TestData{
                 .createdDate(Default.createdDate)
                 .start(Instant.now())
                 .end(Instant.now())
-                .status(null)
+                .status(Default.status)
+                .societe(Default.societe)
                 .build();
 
     }
@@ -35,7 +36,8 @@ public final class ExerciceDTOTestData extends TestData{
                 .createdDate(Default.createdDate)
                 .start(Instant.now())
                 .end(Instant.now())
-                .status(null)
+                .status(Default.status)
+                .societe(Default.societe)
                 .build();
     }
 

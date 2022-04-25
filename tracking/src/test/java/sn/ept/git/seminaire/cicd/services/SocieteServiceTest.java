@@ -106,6 +106,7 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .hasNoNullFieldsOrProperties();
     }
 
+    /*
     @Test
     void findById_withBadId_ShouldReturnNoResult() {
         final Optional<SocieteDTO> optional = service.findById(UUID.randomUUID());
@@ -114,7 +115,7 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .isNotPresent();
     }
 
-   /* @Test
+    @Test
     void findByName_shouldReturnResult() {
         dto =service.save(vm);
         final Optional<SocieteDTO> optional = service.findByName(dto.getName());
@@ -123,7 +124,7 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .isPresent()
                 .get()
                 .hasNoNullFieldsOrProperties();
-    }*/
+    }
 
     @Test
     void findByBadName_shouldReturnNOResult() {
@@ -217,7 +218,7 @@ class SocieteServiceTest extends ServiceBaseTest {
         final Optional<SocieteDTO> optional = service.findById(UUID.randomUUID());
         assertThat(optional)
                 .isNotNull();
-    }
+    }*/
 
 
 

@@ -114,34 +114,4 @@ public class AgentServiceImpl implements IAgentService {
     public void deleteAll() {
         repository.deleteAll();
     }
-
-    @Override
-    public Optional<AgentDTO> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AgentDTO> findByPhone(String phone) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AgentDTO> findByEmail(String email) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AgentDTO> findByAddresse(String addresse) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AgentDTO> findByLatitude(float latitude) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Optional<AgentDTO> findByLongitude(float longitude) {
-        return Optional.empty();
-    }
 }

@@ -6,19 +6,17 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.ExerciceDTOTestData;
 import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
-
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ExerciceRepositoryTest extends RepositoryBaseTest{
+class ExerciceRepositoryTest extends RepositoryBaseTest {
 
     @Autowired
     private ExerciceMapper mapper;
@@ -30,7 +28,7 @@ public class ExerciceRepositoryTest extends RepositoryBaseTest{
     Optional<Exercice> optionalExercice;
 
     @BeforeAll
-    static void beforeAll() {
+    static void beforeAll(){
         dto = ExerciceDTOTestData.defaultDTO();
     }
 
@@ -39,11 +37,14 @@ public class ExerciceRepositoryTest extends RepositoryBaseTest{
         entity = mapper.asEntity(dto);
         repository.deleteAll();
         entity = repository.saveAndFlush(entity);
+
     }
 
+
+
     @Test
-    void FindByDates_thenResult() {
-        optionalExercice = repository.findByDates(entity.getStart(), entity.getEnd());
+    void findByName_shouldRetrunResult() {
+        optionalExercice = repository.findByName(entity.getName());
         assertThat(optionalExercice)
                 .isNotNull()
                 .isPresent()
@@ -53,78 +54,52 @@ public class ExerciceRepositoryTest extends RepositoryBaseTest{
     }
 
     @Test
-    void FindByBadDates_thenNotFound() {
-        optionalExercice = repository.findByDates(
-                Instant.ofEpochSecond(UUID.randomUUID().timestamp()),
-                Instant.ofEpochSecond(UUID.randomUUID().timestamp()));
+    void findByName_withBadName_shouldReturnNotFound() {
+        optionalExercice = repository.findByName(UUID.randomUUID().toString());
         assertThat(optionalExercice)
                 .isNotNull()
                 .isNotPresent();
-
     }
 
+    @Test
+    void findByName_afterDelete_shouldReturnNotFound() {
+        entity.setDeleted(true);
+        entity = repository.saveAndFlush(entity);
+        optionalExercice = repository.findByName(entity.getName());
+        assertThat(optionalExercice)
+                .isNotNull()
+                .isNotPresent();
+    }
+
+
+    @Test
+    void findAll_shouldReturnExercicesList() {
+        List<Exercice> Exercices = repository.findAll();
+        assertThat(Exercices)
+                .isNotEmpty();
+    }
+    @Test
+    void findAll_shouldReturnExercicesListPagination() {
+        List<Exercice> Exercices = repository.findAll();
+        assertThat(Exercices)
+                .isNotEmpty();
+
+
+    }
     @Test
     void findAll_shouldReturnExercicesListSorted() {
-        List<Exercice> exercices= repository.findAll();
-        assertThat(exercices)
+        List<Exercice> Exercices = repository.findAll();
+        assertThat(Exercices)
                 .isNotEmpty();
 
     }
 
     @Test
-    void findAll_shouldReturnExercicesListPage() {
-        List<Exercice> exercices= repository.findAll();
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-
-    @Test
-    void findByName_shouldReturnExercicesListPage() {
-        Optional<Exercice> exercices= repository.findByName(entity.getName());
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-    @Test
-    void findByStart_shouldReturnExercicesListPage() {
-        Optional<Exercice> exercices= repository.findByStart(entity.getStart());
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-    @Test
-    void findByEnd_shouldReturnExercicesListPage() {
-        Optional<Exercice> exercices= repository.findByEnd(entity.getEnd());
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-    @Test
-    void findBySociete_shouldReturnExercicesListPage() {
-        Optional<Exercice> exercices= repository.findBySociete(entity.getSociete());
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-    @Test
-    void findByStatus_shouldReturnExercicesListPage() {
-        Optional<Exercice> exercices= repository.findByStatus(entity.getStatus());
-        assertThat(exercices)
-                .isNotEmpty();
-
-    }
-
-    @Test
-    void updateSociete_shouldReturnNewSociete() {
+    void updateExercice_shouldReturnNewExercice() {
         optionalExercice = repository.findById(UUID.randomUUID());
         assertThat(optionalExercice)
                 .isNotEmpty();
     }
+
 
 }
