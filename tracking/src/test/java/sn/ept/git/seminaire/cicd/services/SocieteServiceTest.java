@@ -1,21 +1,12 @@
 package sn.ept.git.seminaire.cicd.services;
 
-import com.tngtech.archunit.core.importer.ClassFileImporter;
-import com.tngtech.archunit.core.importer.ImportOption;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Ignore;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.jdbc.SqlGroup;
-import sn.ept.git.seminaire.cicd.data.SocieteDTOTestData;
 import sn.ept.git.seminaire.cicd.data.SocieteVMTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
-import sn.ept.git.seminaire.cicd.demo.exception.BadPhoneException;
 import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
 import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
@@ -24,6 +15,8 @@ import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.SocieteVMMapper;
 import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -139,10 +132,21 @@ class SocieteServiceTest extends ServiceBaseTest {
         );
     }
 
-/*
-    findAll
-    update
-*/
+    @Test
+    void findAllSociete_ShouldReturnSocietes() {
+        final List<SocieteDTO> societes = service.findAll();
+        assertThat(societes)
+                .isEmpty();
+
+    }
+
+    @Test
+    void updateSociete_verifyID(){
+        final Optional<SocieteDTO> optional = service.findById(UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull();
+    }
+
 
 
 }
