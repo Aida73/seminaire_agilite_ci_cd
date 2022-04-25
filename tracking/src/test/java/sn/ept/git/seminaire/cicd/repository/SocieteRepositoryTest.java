@@ -188,7 +188,14 @@ class SocieteRepositoryTest extends RepositoryBaseTest {
         assertThat(societes)
                 .isNotEmpty();
 
-
     }
+
+    @Test
+    void updateSociete_shouldReturnNewSociete() {
+        optionalSociete = repository.findById(UUID.randomUUID());
+        assertThat(optionalSociete)
+                .isNotEmpty();
+    }
+
 
 }
