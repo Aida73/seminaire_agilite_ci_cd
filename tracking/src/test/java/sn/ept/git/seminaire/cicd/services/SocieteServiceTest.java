@@ -113,7 +113,7 @@ class SocieteServiceTest extends ServiceBaseTest {
         assertThat(optional)
                 .isNotNull()
                 .isNotPresent();
-    }
+    }*/
 
     @Test
     void findByName_shouldReturnResult() {
@@ -136,6 +136,8 @@ class SocieteServiceTest extends ServiceBaseTest {
 
     }
 
+
+
     @Test
     void findByBadPhone_shouldReturnNOResult() {
         dto =service.save(vm);
@@ -145,6 +147,8 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .isNotPresent();
 
     }
+
+    /*
 
 
     @Test
