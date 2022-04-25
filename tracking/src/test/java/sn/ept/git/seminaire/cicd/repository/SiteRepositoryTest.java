@@ -14,6 +14,7 @@ import sn.ept.git.seminaire.cicd.models.Site;
 import sn.ept.git.seminaire.cicd.repositories.SiteRepository;
 import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -150,5 +151,19 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
         assertThat(optionalSite)
                 .isNotNull()
                 .isNotPresent();
+    }
+
+    @Test
+    void findBySociete() {
+        List<Site> optionalsite = repository.findBySociete(entity.getSociete());
+        assertThat(optionalSite)
+                .isNotEmpty();
+    }
+    @Test
+    void findAllSites() {
+        List<Site> optionalsite = repository.findAll();
+        assertThat(optionalSite)
+                .isNotEmpty();
+
     }
 }
