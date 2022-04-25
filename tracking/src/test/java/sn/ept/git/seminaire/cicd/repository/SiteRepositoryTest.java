@@ -4,15 +4,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
-import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
-import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.data.SiteDTOTestData;
 import sn.ept.git.seminaire.cicd.dto.SiteDTO;
 import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
 import sn.ept.git.seminaire.cicd.models.Site;
 import sn.ept.git.seminaire.cicd.repositories.SiteRepository;
-import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,16 +23,12 @@ public class SiteRepositoryTest extends RepositoryBaseTest {
     @Autowired
     private SiteRepository repository;
 
-    @Autowired
-    private SocieteRepository societeRepository;
 
-    Societe societeEntity;
+
 
     static SiteDTO dto;
-    static SocieteDTO societeDTO;
 
-    @Autowired
-    private SocieteMapper societeMapper;
+
 
     Site entity;
     Optional<Site> optionalSite;

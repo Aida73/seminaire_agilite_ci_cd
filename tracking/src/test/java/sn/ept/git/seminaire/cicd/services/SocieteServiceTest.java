@@ -39,7 +39,6 @@ class SocieteServiceTest extends ServiceBaseTest {
     SocieteRepository societeRepository;
     @Autowired
     ISocieteService service;
-    Optional<Societe> societe;
      static  SocieteVM vm ;
     SocieteDTO dto;
 
@@ -114,6 +113,79 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .isNotNull()
                 .isNotPresent();
     }
+
+   /* @Test
+    void findByName_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByName(dto.getName());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent()
+                .get()
+                .hasNoNullFieldsOrProperties();
+    }*/
+
+    @Test
+    void findByBadName_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByName(dto.getName()+UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadPhone_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByPhone(dto.getPhone()+UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+
+    @Test
+    void findByBadEmail_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByEmail(dto.getEmail()+UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadAddresse_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByAddresse(dto.getAddress()+UUID.randomUUID());
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadLatitude_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByLatitude(dto.getLatitude()*2);
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadLongitude_shouldReturnNOResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByLongitude(dto.getLongitude()*1009);
+        assertThat(optional)
+                .isNotNull()
+                .isNotPresent();
+
+    }
+
 
     @Test
     void delete_shouldDeleteSociete() {

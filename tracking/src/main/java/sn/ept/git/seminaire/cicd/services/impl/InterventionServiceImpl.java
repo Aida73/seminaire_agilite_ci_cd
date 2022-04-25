@@ -118,4 +118,34 @@ public class InterventionServiceImpl implements IInterventionService {
         repository.deleteAll();
     }
 
+    @Override
+    public Optional<InterventionDTO> findByName(String name) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<InterventionDTO> findByPhone(String Phone) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<InterventionDTO> findByEmail(String email) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<InterventionDTO> findByAddresse(String addresse) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<InterventionDTO> findByLatitude(float latitude) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<InterventionDTO> findByLongitude(float longitude) {
+        return Optional.empty();
+    }
+
 }

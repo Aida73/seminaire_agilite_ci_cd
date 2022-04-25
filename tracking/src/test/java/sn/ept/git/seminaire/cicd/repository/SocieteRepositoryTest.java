@@ -37,7 +37,10 @@ class SocieteRepositoryTest extends RepositoryBaseTest {
         entity = mapper.asEntity(dto);
         repository.deleteAll();
         entity = repository.saveAndFlush(entity);
+
     }
+
+
 
     @Test
     void findByName_shouldRetrunResult() {

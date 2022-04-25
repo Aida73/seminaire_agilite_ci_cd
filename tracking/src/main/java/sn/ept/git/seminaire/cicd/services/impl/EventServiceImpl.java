@@ -71,4 +71,34 @@ public class EventServiceImpl implements IEventService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+    @Override
+    public Optional<EventDTO> findByName(String name) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EventDTO> findByPhone(String Phone) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EventDTO> findByEmail(String email) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EventDTO> findByAddresse(String addresse) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EventDTO> findByLatitude(float latitude) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EventDTO> findByLongitude(float longitude) {
+        return Optional.empty();
+    }
 }
