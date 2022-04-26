@@ -12,10 +12,8 @@ import sn.ept.git.seminaire.cicd.dto.vm.ExerciceVM;
 import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
 import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.ExerciceVMMapper;
-import sn.ept.git.seminaire.cicd.models.Exercice;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
 
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,7 +29,6 @@ public class ExerciceServiceTest extends ServiceBaseTest{
     ExerciceRepository exerciceRepository;
     @Autowired
     IExerciceService service;
-    Optional<Exercice> exercice;
     static ExerciceVM vm ;
     ExerciceDTO dto;
 

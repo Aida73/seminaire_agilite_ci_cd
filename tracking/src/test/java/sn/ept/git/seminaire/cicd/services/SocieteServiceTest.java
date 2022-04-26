@@ -13,7 +13,6 @@ import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
 import sn.ept.git.seminaire.cicd.exceptions.ItemNotFoundException;
 import sn.ept.git.seminaire.cicd.mappers.SocieteMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.SocieteVMMapper;
-import sn.ept.git.seminaire.cicd.models.Societe;
 import sn.ept.git.seminaire.cicd.repositories.SocieteRepository;
 
 import java.util.List;
@@ -106,14 +105,14 @@ class SocieteServiceTest extends ServiceBaseTest {
                 .hasNoNullFieldsOrProperties();
     }
 
-    /*
+
     @Test
     void findById_withBadId_ShouldReturnNoResult() {
         final Optional<SocieteDTO> optional = service.findById(UUID.randomUUID());
         assertThat(optional)
                 .isNotNull()
                 .isNotPresent();
-    }*/
+    }
 
     @Test
     void findByName_shouldReturnResult() {

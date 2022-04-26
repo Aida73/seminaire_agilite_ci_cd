@@ -13,7 +13,6 @@ import sn.ept.git.seminaire.cicd.exceptions.ItemExistsException;
 import sn.ept.git.seminaire.cicd.exceptions.ItemNotFoundException;
 import sn.ept.git.seminaire.cicd.mappers.SiteMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.SiteVMMapper;
-import sn.ept.git.seminaire.cicd.models.Site;
 import sn.ept.git.seminaire.cicd.repositories.SiteRepository;
 
 import java.util.Optional;
@@ -33,7 +32,6 @@ public class SiteServiceTest extends ServiceBaseTest{
     SiteRepository siteRepository;
     @Autowired
     ISiteService service;
-    Optional<Site> site;
     static SiteVM vm ;
     SiteDTO dto;
 
