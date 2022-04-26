@@ -39,7 +39,7 @@ class SocieteServiceTest extends ServiceBaseTest {
     SocieteRepository societeRepository;
     @Autowired
     ISocieteService service;
-     static  SocieteVM vm ;
+    static  SocieteVM vm ;
     SocieteDTO dto;
 
 
@@ -50,8 +50,8 @@ class SocieteServiceTest extends ServiceBaseTest {
     }
 
     @BeforeEach
-     void beforeEach(){
-       log.info(" before each");
+    void beforeEach(){
+        log.info(" before each");
     }
 
     @Test
@@ -148,7 +148,7 @@ class SocieteServiceTest extends ServiceBaseTest {
 
     }
 
-    /*
+
 
 
     @Test
@@ -164,7 +164,7 @@ class SocieteServiceTest extends ServiceBaseTest {
     @Test
     void findByBadAddresse_shouldReturnNOResult() {
         dto =service.save(vm);
-        final Optional<SocieteDTO> optional = service.findByAddresse(dto.getAddress()+UUID.randomUUID());
+        final Optional<SocieteDTO> optional = service.findByAddress(dto.getAddress()+UUID.randomUUID());
         assertThat(optional)
                 .isNotNull()
                 .isNotPresent();
@@ -222,7 +222,7 @@ class SocieteServiceTest extends ServiceBaseTest {
         final Optional<SocieteDTO> optional = service.findById(UUID.randomUUID());
         assertThat(optional)
                 .isNotNull();
-    }*/
+    }
 
 
 

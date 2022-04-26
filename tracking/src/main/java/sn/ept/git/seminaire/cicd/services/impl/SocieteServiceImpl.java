@@ -127,4 +127,34 @@ public class SocieteServiceImpl implements ISocieteService {
                 .findByPhone(phone)
                 .map(mapper::asDTO);
     }
+
+    @Override
+    public Optional<SocieteDTO> findByEmail(String email) {
+       return repository
+                .findByEmail(email)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByAddress(String address) {
+        return repository
+                .findByAddress(address)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByLatitude(float latitude) {
+        return repository
+                .findByLatitude(latitude)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByLongitude(float longitude) {
+        return repository
+                .findByLongitude(longitude)
+                .map(mapper::asDTO);
+    }
+
+
 }

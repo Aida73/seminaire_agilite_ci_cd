@@ -13,4 +13,13 @@ public interface ISocieteService extends GenericService<SocieteDTO, SocieteVM, U
     Optional<SocieteDTO> findByName(String name);
 
     Optional<SocieteDTO> findByPhone(String phone);
+
+    Optional<SocieteDTO> findByEmail(String email);
+
+    Optional<SocieteDTO> findByAddress(String s);
+
+    Optional<SocieteDTO> findByLatitude(float v);
+
+    Optional<SocieteDTO> findByLongitude(float v);
+
 }
