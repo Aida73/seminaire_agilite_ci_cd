@@ -136,7 +136,26 @@ class SocieteServiceTest extends ServiceBaseTest {
 
     }
 
+    @Test
+    void findByBadName_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByName(dto.getName());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent();
 
+    }
+
+
+    @Test
+    void findByBadPhone_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByPhone(dto.getPhone());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent();
+
+    }
 
     @Test
     void findByBadPhone_shouldReturnNOResult() {
@@ -162,12 +181,31 @@ class SocieteServiceTest extends ServiceBaseTest {
     }
 
     @Test
+    void findByBadAddresse_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByAddresse(dto.getAddress());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent();
+    }
+
+    @Test
     void findByBadAddresse_shouldReturnNOResult() {
         dto =service.save(vm);
         final Optional<SocieteDTO> optional = service.findByAddresse(dto.getAddress()+UUID.randomUUID());
         assertThat(optional)
                 .isNotNull()
                 .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadLatitude_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByLatitude(dto.getLatitude());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent();
 
     }
 
@@ -188,6 +226,16 @@ class SocieteServiceTest extends ServiceBaseTest {
         assertThat(optional)
                 .isNotNull()
                 .isNotPresent();
+
+    }
+
+    @Test
+    void findByBadLongitude_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByLongitude(dto.getLongitude());
+        assertThat(optional)
+                .isNotNull()
+                .isPresent();
 
     }
 
