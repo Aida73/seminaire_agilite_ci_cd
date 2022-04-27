@@ -15,4 +15,6 @@ public interface ExerciceRepository extends JpaRepository<Exercice, UUID> {
     @Query("select e from Exercice  e where :start between e.start and e.end or :end between e.start and e.end ")
     Optional<Exercice> findByDates(Instant start, Instant end );
 
+    @Query("select e from Exercice  e where e.name=:name")
+    Optional<Exercice> findByName(String name);
 }

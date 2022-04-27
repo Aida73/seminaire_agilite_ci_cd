@@ -55,7 +55,15 @@ public class TestData {
         public static final float longitude= RandomUtils.nextFloat();
         public static final float latitude=RandomUtils.nextFloat();
 
-        public static final StatusExercice status = StatusExercice.CLOSED;
+        public static final Instant start = Instant.now();
+
+        public static final Instant end = Instant.now().plusSeconds(10);
+
+        public static final StatusExercice status = StatusExercice.OPEN;
+
+        public static final SocieteDTO societe = SocieteDTOTestData.defaultDTO();
+
+        public static  final UUID idSociete = societe.getId();
     }
 
 }

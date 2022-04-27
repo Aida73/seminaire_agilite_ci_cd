@@ -7,15 +7,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import sn.ept.git.seminaire.cicd.data.SiteVMTestData;
+import sn.ept.git.seminaire.cicd.data.ExerciceVMTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
-import sn.ept.git.seminaire.cicd.dto.SiteDTO;
-import sn.ept.git.seminaire.cicd.dto.vm.SiteVM;
-import sn.ept.git.seminaire.cicd.services.ISiteService;
+import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
+import sn.ept.git.seminaire.cicd.dto.vm.ExerciceVM;
+import sn.ept.git.seminaire.cicd.enums.StatusExercice;
+import sn.ept.git.seminaire.cicd.services.IExerciceService;
 import sn.ept.git.seminaire.cicd.utils.SizeMapping;
 import sn.ept.git.seminaire.cicd.utils.TestUtil;
 import sn.ept.git.seminaire.cicd.utils.UrlMapping;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -25,12 +27,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
-class SiteResourceTest extends BasicResourceTest {
+class ExerciceResourceTest extends BasicResourceTest {
 
-    static private SiteVM vm;
+    static private ExerciceVM vm;
     @Autowired
-    private ISiteService service;
-    private SiteDTO dto;
+    private IExerciceService service;
+    private ExerciceDTO dto;
 
 
     @BeforeAll
@@ -42,13 +44,13 @@ class SiteResourceTest extends BasicResourceTest {
     void beforeEach() {
         log.info(" before each ");
         service.deleteAll();
-        vm = SiteVMTestData.defaultVM();
+        vm = ExerciceVMTestData.defaultVM();
     }
 /*
     @Test
-    void findAll_shouldReturnSites() throws Exception {
+    void findAll_shouldReturnExercices() throws Exception {
         dto = service.save(vm);
-        mockMvc.perform(get(UrlMapping.Site.ALL)
+        mockMvc.perform(get(UrlMapping.Exercice.ALL)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 //.andDo(MockMvcResultHandlers.print()) //can print request details
@@ -59,46 +61,44 @@ class SiteResourceTest extends BasicResourceTest {
                 .andExpect(jsonPath("$.content.[0].deleted").exists())
                 .andExpect(jsonPath("$.content.[0].enabled", is(true)))
                 .andExpect(jsonPath("$.content.[0].deleted").value(false))
-                .andExpect(jsonPath("$.content.[0].name", is(dto.getName())))
-                .andExpect(jsonPath("$.content.[0].phone").value(dto.getPhone()))
-                .andExpect(jsonPath("$.content.[0].email").value(dto.getEmail()))
-                .andExpect(jsonPath("$.content.[0].longitude").value(dto.getLongitude()))
-                .andExpect(jsonPath("$.content.[0].latitude").value(dto.getLatitude()));
-
-
+                .andExpect(jsonPath("$.name").value(vm.getName()))
+                .andExpect(jsonPath("$.start").value(vm.getStart()))
+                .andExpect(jsonPath("$.end").value(vm.getEnd()))
+                .andExpect(jsonPath("$.status").value(vm.getStatus()))
+                .andExpect(jsonPath("$.idSociete").value(vm.getIdSociete()));
 
     }
 
 
     @Test
-    void findById_shouldReturnSite() throws Exception {
+    void findById_shouldReturnExercice() throws Exception {
         dto = service.save(vm);
-        mockMvc.perform(get(UrlMapping.Site.FIND_BY_ID, dto.getId())
+        mockMvc.perform(get(UrlMapping.Exercice.FIND_BY_ID, dto.getId())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.version").exists())
                 .andExpect(jsonPath("$.enabled").exists())
                 .andExpect(jsonPath("$.deleted").exists())
-                .andExpect(jsonPath("$.name", is(dto.getName())))
-                .andExpect(jsonPath("$.phone").value(dto.getPhone()))
-                .andExpect(jsonPath("$.email").value(dto.getEmail()))
-                .andExpect(jsonPath("$.longitude").value(dto.getLongitude()))
-                .andExpect(jsonPath("$.latitude").value(dto.getLatitude()));
+                .andExpect(jsonPath("$.name").value(vm.getName()))
+                .andExpect(jsonPath("$.start").value(vm.getStart()))
+                .andExpect(jsonPath("$.end").value(vm.getEnd()))
+                .andExpect(jsonPath("$.status").value(vm.getStatus()))
+                .andExpect(jsonPath("$.idSociete").value(vm.getIdSociete()));
     }
 
     @Test
     void findById_withBadId_shouldReturnNotFound() throws Exception {
-        mockMvc.perform(get(UrlMapping.Site.FIND_BY_ID, UUID.randomUUID().toString())
+        mockMvc.perform(get(UrlMapping.Exercice.FIND_BY_ID, UUID.randomUUID().toString())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
 
 
     @Test
-    void add_shouldCreateSite() throws Exception {
+    void add_shouldCreateExercice() throws Exception {
         mockMvc.perform(
-                        post(UrlMapping.Site.ADD)
+                        post(UrlMapping.Exercice.ADD)
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(TestUtil.convertObjectToJsonBytes(vm))
                 )
@@ -108,16 +108,16 @@ class SiteResourceTest extends BasicResourceTest {
                 .andExpect(jsonPath("$.enabled").exists())
                 .andExpect(jsonPath("$.deleted").exists())
                 .andExpect(jsonPath("$.name").value(vm.getName()))
-                .andExpect(jsonPath("$.phone").value(vm.getPhone()))
-                .andExpect(jsonPath("$.email").value(vm.getEmail()))
-                .andExpect(jsonPath("$.longitude").value(vm.getLongitude()))
-                .andExpect(jsonPath("$.latitude").value(vm.getLatitude()));
+                .andExpect(jsonPath("$.start").value(vm.getStart()))
+                .andExpect(jsonPath("$.end").value(vm.getEnd()))
+                .andExpect(jsonPath("$.status").value(vm.getStatus()))
+                .andExpect(jsonPath("$.idSociete").value(vm.getIdSociete()));
     }
 
     @Test
     void add_withNameMinLengthExceeded_shouldReturnBadRequest() throws Exception {
         vm.setName(RandomStringUtils.random(SizeMapping.Name.MIN - 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
+        mockMvc.perform(post(UrlMapping.Exercice.ADD)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
@@ -126,61 +126,26 @@ class SiteResourceTest extends BasicResourceTest {
     @Test
     void add_withNameMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
         vm.setName(RandomStringUtils.random(SizeMapping.Name.MAX + 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
+        mockMvc.perform(post(UrlMapping.Exercice.ADD)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
     }
 
 
-    @Test
-    void add_withPhoneMinLengthExceeded_shouldReturnBadRequest() throws Exception {
-        vm.setPhone(RandomStringUtils.random(SizeMapping.Phone.MIN - 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(vm)))
-                .andExpect(status().isBadRequest());
-    }
 
-    @Test
-    void add_withPhoneMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
-        vm.setPhone(RandomStringUtils.random(SizeMapping.Phone.MAX + 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(vm)))
-                .andExpect(status().isBadRequest());
-    }
 
 
     @Test
-    void add_withEmailMinLengthExceeded_shouldReturnBadRequest() throws Exception {
-        vm.setEmail(RandomStringUtils.random(SizeMapping.Email.MIN - 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(vm)))
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    void add_withEmailMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
-        vm.setEmail(RandomStringUtils.random(SizeMapping.Email.MAX + 1));
-        mockMvc.perform(post(UrlMapping.Site.ADD)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(TestUtil.convertObjectToJsonBytes(vm)))
-                .andExpect(status().isBadRequest());
-    }
-
-
-    @Test
-    void update_shouldUpdateSite() throws Exception {
+    void update_shouldUpdateExercice() throws Exception {
         dto = service.save(vm);
         vm.setName(TestData.Update.name);
-        vm.setPhone(TestData.Update.phone);
-        vm.setEmail(TestData.Update.email);
-        vm.setLongitude(TestData.Update.longitude);
-        vm.setLatitude(TestData.Update.latitude);
+        vm.setStart(TestData.Update.start);
+        vm.setEnd(TestData.Update.end);
+        vm.setStatus(TestData.Update.status);
+        vm.setIdSociete(TestData.Update.idSociete);
         mockMvc.perform(
-                        put(UrlMapping.Site.UPDATE, dto.getId())
+                        put(UrlMapping.Exercice.UPDATE, dto.getId())
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(TestUtil.convertObjectToJsonBytes(vm))
                 )
@@ -190,17 +155,17 @@ class SiteResourceTest extends BasicResourceTest {
                 .andExpect(jsonPath("$.enabled").exists())
                 .andExpect(jsonPath("$.deleted").exists())
                 .andExpect(jsonPath("$.name").value(vm.getName()))
-                .andExpect(jsonPath("$.phone").value(vm.getPhone()))
-                .andExpect(jsonPath("$.email").value(vm.getEmail()))
-                .andExpect(jsonPath("$.longitude").value(vm.getLongitude()))
-                .andExpect(jsonPath("$.latitude").value(vm.getLatitude()));
+                .andExpect(jsonPath("$.start").value(vm.getStart()))
+                .andExpect(jsonPath("$.end").value(vm.getEnd()))
+                .andExpect(jsonPath("$.status").value(vm.getStatus()))
+                .andExpect(jsonPath("$.idSociete").value(vm.getIdSociete()));
     }
 
     @Test
     void update_withNameMinLengthExceeded_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
         vm.setName(RandomStringUtils.random(SizeMapping.Name.MIN - 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
@@ -210,7 +175,7 @@ class SiteResourceTest extends BasicResourceTest {
     void update_withNameMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
         vm.setName(RandomStringUtils.random(SizeMapping.Name.MAX + 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
@@ -218,20 +183,20 @@ class SiteResourceTest extends BasicResourceTest {
 
 
     @Test
-    void update_withPhoneMinLengthExceeded_shouldReturnBadRequest() throws Exception {
+    void update_withStatusClosed_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
-        vm.setPhone(RandomStringUtils.random(SizeMapping.Phone.MIN - 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        vm.setStatus(StatusExercice.CLOSED);
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void update_withPhoneMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
+    void update_withStartNow_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
-        vm.setPhone(RandomStringUtils.random(SizeMapping.Phone.MAX + 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        vm.setStart(Instant.now());
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
@@ -239,20 +204,20 @@ class SiteResourceTest extends BasicResourceTest {
 
 
     @Test
-    void update_withEmailMinLengthExceeded_shouldReturnBadRequest() throws Exception {
+    void update_withEndNowExceeded_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
-        vm.setEmail(RandomStringUtils.random(SizeMapping.Email.MIN - 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        vm.setStart(Instant.now());
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
-    void update_withEmailMaxLengthExceeded_shouldReturnBadRequest() throws Exception {
+    void update_withBadIdSociete_shouldReturnBadRequest() throws Exception {
         dto = service.save(vm);
-        vm.setEmail(RandomStringUtils.random(SizeMapping.Email.MAX + 1));
-        mockMvc.perform(put(UrlMapping.Site.UPDATE, dto.getId())
+        vm.setIdSociete(UUID.randomUUID());
+        mockMvc.perform(put(UrlMapping.Exercice.UPDATE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(TestUtil.convertObjectToJsonBytes(vm)))
                 .andExpect(status().isBadRequest());
@@ -260,10 +225,10 @@ class SiteResourceTest extends BasicResourceTest {
 
 
     @Test
-    void delete_shouldDeleteSite() throws Exception {
+    void delete_shouldDeleteExercice() throws Exception {
         dto = service.save(vm);
         mockMvc.perform(
-                delete(UrlMapping.Site.DELETE, dto.getId())
+                delete(UrlMapping.Exercice.DELETE, dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNoContent());
     }
@@ -272,7 +237,7 @@ class SiteResourceTest extends BasicResourceTest {
     void delete_withBadId_shouldReturnNotFound() throws Exception {
         dto = service.save(vm);
         mockMvc.perform(
-                delete(UrlMapping.Site.DELETE, UUID.randomUUID().toString())
+                delete(UrlMapping.Exercice.DELETE, UUID.randomUUID().toString())
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isNotFound());
     }*/
