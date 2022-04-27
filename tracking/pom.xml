@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.5.2</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>sn.ept.git.seminaire.cicd</groupId>
     <artifactId>tracking</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+
+    <version>1.0.0</version>
     <name>tracking</name>
     <description>Projet de tracking d'evenements</description>
     <packaging>war</packaging>
@@ -19,7 +19,8 @@
         <java.version>17</java.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
-        <archunit-junit5.version>0.14.1</archunit-junit5.version>
+        <projet.version>1.0.0</projet.version>
+        <archunit-junit5.version>0.23.1</archunit-junit5.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.8</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -37,7 +38,6 @@
             <artifactId>jacoco-maven-plugin</artifactId>
             <version>${jacoco.version}</version>
         </dependency>
-
 
         <!-- archi test-->
         <dependency>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.9.0</version>
+            <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -147,7 +147,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.1</version>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -174,14 +174,9 @@
             <artifactId>maven-surefire-common</artifactId>
             <version>3.0.0-M4</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
     </dependencies>
-
     <build>
-        <finalName>tracking-dev</finalName>
+        <finalName>tracking</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -260,6 +255,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                </configuration>
             </plugin>
         </plugins>
     </build>
