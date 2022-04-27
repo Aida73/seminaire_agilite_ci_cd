@@ -22,15 +22,4 @@ public interface ExerciceRepository extends JpaRepository<Exercice, UUID> {
     @Query("select  s from Exercice  s where s.name=:name")
     Optional<Exercice> findByName(@Param("name") String name);
 
-    @Query("select  s from Exercice  s where s.start=:start")
-    Optional<Exercice> findByStart(Instant start);
-
-    @Query("select  s from Exercice  s where s.end=:end")
-    Optional<Exercice> findByEnd(Instant end);
-
-    @Query("select  s from Exercice  s where s.societe=:societe")
-    Optional<Exercice> findBySociete(Societe societe);
-
-    @Query("select  s from Exercice  s where s.status=:status")
-    Optional<Exercice> findByStatus(StatusExercice status);
 }

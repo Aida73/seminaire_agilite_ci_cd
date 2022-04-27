@@ -24,15 +24,5 @@ public interface GenericService<D,V, I> {
 
     void deleteAll();
 
-   /* Optional<D> findByName(String name);
 
-    Optional<D> findByPhone(String phone);
-
-    Optional<D> findByEmail(String email);
-
-    Optional<D> findByAddresse(String addresse);
-
-    Optional<D> findByLatitude(float latitude);
-
-    Optional<D> findByLongitude(float longitude);*/
 }

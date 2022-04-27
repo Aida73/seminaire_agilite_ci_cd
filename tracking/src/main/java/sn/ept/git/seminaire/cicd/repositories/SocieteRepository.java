@@ -34,14 +34,5 @@ public interface SocieteRepository extends JpaRepository<Societe, UUID> {
     @Query("select s from Societe  s where s.email=:email and s.id<>:id")
     Optional<Societe> findByEmailWithIdNotEqual(@Param("email") String email,@Param("id") UUID uuid);
 
-    @Query("select s from Societe  s where s.address=:address ")
-    Optional<Societe> findByAddress(@Param("address") String address);
 
-
-    @Query("select s from Societe  s where s.latitude=:latitude ")
-    Optional<Societe> findByLatitude(@Param("latitude") float latitude);
-
-
-    @Query("select s from Societe  s where s.longitude=:s")
-    Optional<Societe> findByLongitude(@Param("longitude") float longitude);
 }

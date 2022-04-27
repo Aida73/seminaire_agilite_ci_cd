@@ -135,7 +135,7 @@ public class SocieteServiceImpl implements ISocieteService {
                 .map(mapper::asDTO);
     }
 
-    @Override
+    /*@Override
     public Optional<SocieteDTO> findByAddress(String address) {
         return repository
                 .findByAddress(address)
@@ -154,7 +154,7 @@ public class SocieteServiceImpl implements ISocieteService {
         return repository
                 .findByLongitude(longitude)
                 .map(mapper::asDTO);
-    }
+    }*/
 
 
 }

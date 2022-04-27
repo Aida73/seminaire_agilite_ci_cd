@@ -20,7 +20,7 @@
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
         <projet.version>1.0.0</projet.version>
-        <archunit-junit5.version>0.14.1</archunit-junit5.version>
+        <archunit-junit5.version>0.23.1</archunit-junit5.version>
         <!-- JaCoCo Properties -->
         <jacoco.version>0.8.8</jacoco.version>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
@@ -139,7 +139,7 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>3.9.0</version>
+            <version>4.0.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -147,7 +147,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.8.1</version>
+            <version>5.8.2</version>
             <scope>test</scope>
         </dependency>
 

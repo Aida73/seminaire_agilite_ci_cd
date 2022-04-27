@@ -21,6 +21,5 @@ public interface SiteRepository extends JpaRepository<Site, UUID> {
     @Query("select s from Site s where s.name=:name and s.id<>:id")
     Optional<Site> findByNameWithIdDifferent(@Param("name") String name, @Param("id") UUID id);
 
-    @Query("select s from Site s where s.societe=:societe")
-    List<Site> findBySociete(Societe societe);
+
 }
