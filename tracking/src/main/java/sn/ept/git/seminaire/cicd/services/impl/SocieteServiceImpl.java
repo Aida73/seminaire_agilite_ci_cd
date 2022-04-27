@@ -113,4 +113,47 @@ public class SocieteServiceImpl implements ISocieteService {
     public void deleteAll() {
         repository.deleteAll();
     }
+
+    @Override
+    public Optional<SocieteDTO> findByName(String name) {
+        return repository
+                .findByName(name)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByPhone(String s) {
+        return repository
+                .findByPhone(s)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByEmail(String s) {
+        return repository
+                .findByEmail(s)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByAddresse(String s) {
+        return repository
+                .findByAddresse(s)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByLatitude(float v) {
+        return repository
+                .findByLatitude(v)
+                .map(mapper::asDTO);
+    }
+
+    @Override
+    public Optional<SocieteDTO> findByLongitude(float v) {
+        return repository
+                .findByLongitude(v)
+                .map(mapper::asDTO);
+    }
+
 }
