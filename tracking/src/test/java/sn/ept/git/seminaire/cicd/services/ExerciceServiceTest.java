@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import sn.ept.git.seminaire.cicd.data.ExerciceVMTestData;
+import sn.ept.git.seminaire.cicd.data.SocieteVMTestData;
 import sn.ept.git.seminaire.cicd.data.TestData;
 import sn.ept.git.seminaire.cicd.dto.ExerciceDTO;
 import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
@@ -16,6 +17,7 @@ import sn.ept.git.seminaire.cicd.mappers.ExerciceMapper;
 import sn.ept.git.seminaire.cicd.mappers.vm.ExerciceVMMapper;
 import sn.ept.git.seminaire.cicd.models.Exercice;
 import sn.ept.git.seminaire.cicd.repositories.ExerciceRepository;
+import sn.ept.git.seminaire.cicd.services.impl.SocieteServiceImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +36,8 @@ public class ExerciceServiceTest extends ServiceBaseTest {
     @Autowired
     ExerciceRepository exerciceRepository;
     @Autowired
+    SocieteServiceImpl societeService;
+    @Autowired
     IExerciceService service;
     Optional<Exercice> exercice;
     static ExerciceVM vm;
@@ -50,20 +54,24 @@ public class ExerciceServiceTest extends ServiceBaseTest {
         log.info(" before each");
     }
 
-    /*
+
     @Test
     void save_shouldSaveExercice() {
-        dto =service.save(vm);
+        SocieteDTO societeDTO = societeService.save(SocieteVMTestData.defaultVM());
+        vm.setIdSociete(societeDTO.getId());
+        dto = service.save(vm);
         assertThat(dto)
                 .isNotNull()
                 .hasNoNullFieldsOrProperties();
-    }*
+    }
+
 
     @Test
     void save_withSameName_shouldThrowException() {
-        dto =service.save(vm);
+        SocieteDTO societeDTO = societeService.save(SocieteVMTestData.defaultVM());
+        vm.setIdSociete(societeDTO.getId());
+        dto = service.save(vm);
         vm.setName(TestData.Update.name);
-        vm.setStatus(TestData.Update.status);
         assertThrows(
                 ItemExistsException.class,
                 () -> service.save(vm)
@@ -72,12 +80,16 @@ public class ExerciceServiceTest extends ServiceBaseTest {
 
     @Test
     void delete_shouldDeleteExercice() {
+        SocieteDTO societeDTO = societeService.save(SocieteVMTestData.defaultVM());
+        vm.setIdSociete(societeDTO.getId());
         dto = service.save(vm);
         long oldCount = exerciceRepository.count();
         service.delete(dto.getId());
         long newCount = exerciceRepository.count();
-        assertThat(oldCount).isEqualTo(newCount+1);
-    }*/
+        assertThat(oldCount).isEqualTo(newCount + 1);
+    }
+
+
 
     @Test
     void delete_withBadId_ShouldThrowException() {
@@ -86,6 +98,7 @@ public class ExerciceServiceTest extends ServiceBaseTest {
                 () -> service.delete(UUID.randomUUID())
         );
     }
+
 
     @Test
     void findAllSociete_ShouldReturnNOExercicess() {
@@ -107,7 +120,10 @@ public class ExerciceServiceTest extends ServiceBaseTest {
 
     @Test
     void updateSociete_verifyID(){
-        final Optional<ExerciceDTO> optional = service.findById(UUID.randomUUID());
+        SocieteDTO societeDTO = societeService.save(SocieteVMTestData.defaultVM());
+        vm.setIdSociete(societeDTO.getId());
+        dto = service.save(vm);
+        final Optional<ExerciceDTO> optional = service.findById(dto.getId());
         assertThat(optional)
                 .isNotNull();
     }
