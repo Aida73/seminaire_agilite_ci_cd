@@ -146,6 +146,17 @@ class SocieteServiceTest extends ServiceBaseTest {
 
     }
 
+    @Test
+    void findByBadNamePage_shouldReturnResult() {
+        dto =service.save(vm);
+        final Optional<SocieteDTO> optional = service.findByName(dto.getName());
+        assertThat(optional)
+                .isPresent();
+
+    }
+
+
+
 
     @Test
     void findByBadPhone_shouldReturnResult() {

@@ -1,5 +1,6 @@
 package sn.ept.git.seminaire.cicd.services;
 
+import org.springframework.data.domain.Page;
 import sn.ept.git.seminaire.cicd.dto.SocieteDTO;
 import sn.ept.git.seminaire.cicd.dto.vm.SocieteVM;
 import sn.ept.git.seminaire.cicd.services.generic.GenericService;
@@ -21,4 +22,5 @@ public interface ISocieteService extends GenericService<SocieteDTO, SocieteVM, U
     Optional<SocieteDTO> findByLatitude(float v);
 
     Optional<SocieteDTO> findByLongitude(float v);
+
 }

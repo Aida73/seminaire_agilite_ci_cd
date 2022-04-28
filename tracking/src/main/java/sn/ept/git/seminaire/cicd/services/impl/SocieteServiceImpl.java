@@ -156,4 +156,6 @@ public class SocieteServiceImpl implements ISocieteService {
                 .map(mapper::asDTO);
     }
 
+
+
 }
